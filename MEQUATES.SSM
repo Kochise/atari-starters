@@ -1,0 +1,6830 @@
+; /// > Mega ATARI Equates Library - KOSS 2000 < ///
+
+; *** Equates Zone ************************************************************
+
+; --------------------- ATARI Memory Adresses ---------------------------------
+
+	; CPU Reset Vectors
+
+MC_ResetInitSSP	EQU	$0
+MC_ResetInit	EQU	$4
+
+	; CPU Exception Vectors
+	
+MC_BusError	EQU	$8
+MC_AddressError	EQU	$C
+MC_IllegalInstr	EQU	$10
+MC_ZeroDivide	EQU	$14
+MC_CHKInstr	EQU	$18
+MC_cpTRAP	EQU	$1C
+MC_PrivilegeViol	EQU	$20
+MC_Trace	EQU	$24
+MC_LineA	EQU	$28
+MC_LineF	EQU	$2C
+MC_Reserved1	EQU	$30
+MC_CoproProtocolViol	EQU	$34
+MC_FormatError	EQU	$38
+MC_Unitialized	EQU	$3C
+MC_Reserved2	EQU	$40
+MC_Reserved3	EQU	$44
+MC_Reserved4	EQU	$48
+MC_Reserved5	EQU	$4C
+MC_Reserved6	EQU	$50
+MC_Reserved7	EQU	$54
+MC_Reserved8	EQU	$58
+MC_Reserved9	EQU	$5C
+MC_SpuriousInterrupt	EQU	$60
+
+	; CPU Auto-Vector Interrupt
+	
+MC_Level1_TTVME	EQU	$64
+MC_Level2_HBL	EQU	$68
+MC_Level3_TTVME	EQU	$6C
+MC_Level4_VBL	EQU	$70
+MC_Level5	EQU	$74
+MC_Level6_STMFP	EQU	$78
+MC_Level7	EQU	$7C
+
+	; CPU Trap Instruction Vectors
+	
+MC_Trap0	EQU	$80
+MC_Trap1_GEMDOS	EQU	$84
+MC_Trap2_AESVDI	EQU	$88
+MC_Trap3	EQU	$8C
+MC_Trap4	EQU	$90
+MC_Trap5	EQU	$94
+MC_Trap6	EQU	$98
+MC_Trap7	EQU	$9C
+MC_Trap8	EQU	$A0
+MC_Trap9	EQU	$A4
+MC_Trap10	EQU	$A8
+MC_Trap11	EQU	$AC
+MC_Trap12	EQU	$B0
+MC_Trap13_BIOS	EQU	$B4
+MC_Trap14_XBIOS	EQU	$B8
+MC_Trap15	EQU	$BC
+
+	; FPU Math Coprocessor Vectors
+	
+MF_BranchSetUnorderer	EQU	$C0
+MF_InexactResult	EQU	$C4
+MF_DivideByZero	EQU	$C8
+MF_Underflow	EQU	$CC
+MF_OperandError	EQU	$D0
+MF_Overflow	EQU	$D4
+MF_SignalingNAN	EQU	$D8
+MF_Reserved	EQU	$DC
+
+	; PMMU Coprocessor Vectors
+	
+MP_ConfigError	EQU	$E0
+MP_68851_Vect1	EQU	$E4
+MP_68851_Vect2	EQU	$E8
+
+	; Miscellaneous Vectors
+	
+MC_Miscellaneous1	EQU	$EC
+MC_Miscellaneous2	EQU	$F0
+MC_Miscellaneous3	EQU	$F4
+MC_Miscellaneous4	EQU	$F8
+MC_Miscellaneous5	EQU	$FC
+
+	; Users Assigned Interrupt Vectors
+	
+MC_Users1_STMFP0	EQU	$100
+MC_Users2_STMFP1	EQU	$104
+MC_Users3_STMFP2	EQU	$108
+MC_Users4_STMFP3	EQU	$10C
+MC_Users5_STMFP4	EQU	$110
+MC_Users6_STMFP5	EQU	$114
+MC_Users7_STMFP6	EQU	$118
+MC_Users8_STMFP7	EQU	$11C
+MC_Users9_STMFP8	EQU	$120
+MC_Users10_STMFP9	EQU	$124
+MC_Users11_STMFP10	EQU	$128
+MC_Users12_STMFP11	EQU	$12C
+MC_Users13_STMFP12	EQU	$130
+MC_Users14_STMFP13	EQU	$134
+MC_Users15_STMFP14	EQU	$138
+MC_Users16_STMFP15	EQU	$13C
+
+MC_Users17_TTMFP0	EQU	$140
+MC_Users18_TTMFP1	EQU	$144
+MC_Users19_TTMFP2	EQU	$148
+MC_Users20_TTMFP3	EQU	$14C
+MC_Users21_TTMFP4	EQU	$150
+MC_Users22_TTMFP5	EQU	$154
+MC_Users23_TTMFP6	EQU	$158
+MC_Users24_TTMFP7	EQU	$15C
+MC_Users25_TTMFP8	EQU	$160
+MC_Users26_TTMFP9	EQU	$164
+MC_Users27_TTMFP10	EQU	$168
+MC_Users28_TTMFP11	EQU	$16C
+MC_Users29_TTMFP12	EQU	$170
+MC_Users30_TTMFP13	EQU	$174
+MC_Users31_TTMFP14	EQU	$178
+MC_Users32_TTMFP15	EQU	$17C
+
+MC_Users33_SCCInt1	EQU	$180
+MC_Users49_SCCInt2	EQU	$1BC
+
+	; System Crash Page
+	
+Proc_Lives	EQU	$380
+
+Proc_DRegs	EQU	$384
+
+Proc_SaveD0	EQU	$384
+Proc_SaveD1	EQU	$388
+Proc_SaveD2	EQU	$38C
+Proc_SaveD3	EQU	$390
+Proc_SaveD4	EQU	$394
+Proc_SaveD5	EQU	$398
+Proc_SaveD6	EQU	$39C
+Proc_SaveD7	EQU	$3A0
+
+Proc_ARegs	EQU	$3A4
+
+Proc_SaveA0	EQU	$3A4
+Proc_SaveA1	EQU	$3A8
+Proc_SaveA2	EQU	$3AC
+Proc_SaveA3	EQU	$3B0
+Proc_SaveA4	EQU	$3B4
+Proc_SaveA5	EQU	$3B8
+Proc_SaveA6	EQU	$3BC
+Proc_SaveA7	EQU	$3C0
+
+Proc_SaveSP	EQU	$3C0
+
+Proc_VectorNumber	EQU	$3C4
+Proc_SaveUSP	EQU	$3C8
+
+Proc_SaveStack	EQU	$3CC
+
+Proc_SaveStackW1	EQU	$3CC
+Proc_SaveStackW2	EQU	$3CE
+Proc_SaveStackW3	EQU	$3D0
+Proc_SaveStackW4	EQU	$3D2
+Proc_SaveStackW5	EQU	$3D4
+Proc_SaveStackW6	EQU	$3D6
+Proc_SaveStackW7	EQU	$3D8
+Proc_SaveStackW8	EQU	$3DA
+Proc_SaveStackW9	EQU	$3DC
+Proc_SaveStackW10	EQU	$3DE
+Proc_SaveStackW11	EQU	$3E0
+Proc_SaveStackW12	EQU	$3E2
+Proc_SaveStackW13	EQU	$3E4
+Proc_SaveStackW14	EQU	$3E6
+Proc_SaveStackW15	EQU	$3E8
+Proc_SaveStackW16	EQU	$3EA
+
+	; System Variables
+	
+Etv_Timer	EQU	$400
+Etv_Critic	EQU	$404
+Etv_Term	EQU	$408
+Etv_Xtra1	EQU	$40C
+Etv_Xtra2	EQU	$410
+Etv_Xtra3	EQU	$414
+Etv_Xtra4	EQU	$418
+Etv_Xtra5	EQU	$41C
+MemValid	EQU	$420
+MemCtrl	EQU	$424	; Copy of $FFFF8001.w
+ResValid	EQU	$426	; Valid if $31415926
+ResVector	EQU	$42A
+PhysTop	EQU	$42E
+_MemBot	EQU	$432	; Start of TPA
+_MemEnd	EQU	$436	; End of TPA
+MemVal2	EQU	$43A	; MemCtrl & MemConf valids if $237689AA
+FLock	EQU	$43E
+SeekRate	EQU	$440
+_Timer_ms	EQU	$442
+_FVerify	EQU	$444
+_BootDev	EQU	$446
+PalMode	EQU	$448
+DefShiftMod	EQU	$44A
+SShiftMod	EQU	$44C
+_V_Bas_Ad	EQU	$44E
+VBLSem	EQU	$452
+NVBLs	EQU	$454
+_VBLQueue	EQU	$456
+ColorPtr	EQU	$45A
+ScreenPt	EQU	$45E
+_VbClock	EQU	$462
+_FrClock	EQU	$466
+Hdv_Init	EQU	$46A
+Swv_Vec	EQU	$46E
+Hdv_BPB	EQU	$472
+Hdv_RW	EQU	$476
+Hdv_Boot	EQU	$47A
+Hdv_MediaCh	EQU	$47E
+_ComLoad	EQU	$482
+ConTerm	EQU	$484
+Trp14Ret	EQU	$486
+CriticRet	EQU	$48A
+TheMD	EQU	$48E
+TheMDMD	EQU	$49E
+SavPtr	EQU	$4A2
+_NFlops	EQU	$4A6
+Con_State	EQU	$4A8
+Save_Row	EQU	$4AC
+Sav_Context	EQU	$4AE
+_BufD	EQU	$4B2
+_BufFD	EQU	$4B6
+_Hz_200	EQU	$4BA
+The_Env	EQU	$4BC
+_DrvBits	EQU	$4C2
+_DskBufP	EQU	$4C6
+_AutoPath	EQU	$4CA
+
+_VBL_List	EQU	$4CE
+
+_VBL_Lis1	EQU	$4CE
+_VBL_Lis2	EQU	$4D2
+_VBL_Lis3	EQU	$4D6
+_VBL_Lis4	EQU	$4DA
+_VBL_Lis5	EQU	$4DE
+_VBL_Lis6	EQU	$4E2
+_VBL_Lis7	EQU	$4E6
+_VBL_Lis8	EQU	$4EA
+
+_DumpFlg	EQU	$4EE
+_PrtAbt	EQU	$4F0
+_SysBase	EQU	$4F2
+_Shell_P	EQU	$4F6
+End_OS	EQU	$4FA
+Exec_OS	EQU	$4FE
+Scr_Dump	EQU	$502
+Prv_LstO	EQU	$506
+Prv_Lst	EQU	$50A
+Prv_AuxO	EQU	$50E
+Prv_Aux	EQU	$512
+Pun_Ptr	EQU	$516
+MemVal3	EQU	$51A
+
+XConStat	EQU	$51E
+
+XConStatDev0	EQU	$51E
+XConStatDev1	EQU	$522
+XConStatDev2	EQU	$526
+XConStatDev3	EQU	$52A
+XConStatDev4	EQU	$52E
+XConStatDev5	EQU	$532
+XConStatDev6	EQU	$536
+XConStatDev7	EQU	$53A
+
+XConIn	EQU	$53E
+
+XConInDev0	EQU	$53E
+XConInDev1	EQU	$542
+XConInDev2	EQU	$546
+XConInDev3	EQU	$54A
+XConInDev4	EQU	$54E
+XConInDev5	EQU	$552
+XConInDev6	EQU	$556
+XConInDev7	EQU	$55A
+
+XCoStat	EQU	$55E
+
+XCoStatDev0	EQU	$55E
+XCoStatDev1	EQU	$562
+XCoStatDev2	EQU	$566
+XCoStatDev3	EQU	$56A
+XCoStatDev4	EQU	$56E
+XCoStatDev5	EQU	$572
+XCoStatDev6	EQU	$576
+XCoStatDev7	EQU	$57A
+
+XConOut	EQU	$57E
+
+XConOutDev0	EQU	$57E
+XConOutDev1	EQU	$582
+XConOutDev2	EQU	$586
+XConOutDev3	EQU	$58A
+XConOutDev4	EQU	$58E
+XConOutDev5	EQU	$592
+XConOutDev6	EQU	$596
+XConOutDev7	EQU	$59A
+
+_LongFrame	EQU	$59E
+_P_Cookies	EQU	$5A0
+RamTop	EQU	$5A4
+RamValid	EQU	$5A8
+Bell_Hook	EQU	$5AC
+KCl_Hook	EQU	$5B0
+
+; --------------------- GEMDOS ------------------------------------------------
+
+	; *** GEMDOS'S Error Codes
+
+	; Look for the Second Part in the BIOS Section
+
+EINVFN	EQU	-32
+EFILNF	EQU	-33
+EPTHNF	EQU	-34
+ENHNDL	EQU	-35
+EACCDN	EQU	-36
+EIHNDL	EQU	-37
+ENSMEM	EQU	-39
+EIMBA	EQU	-40
+EDRIVE	EQU	-46
+ENSAME	EQU	-48
+ENMFIL	EQU	-49
+ELOCKED	EQU	-58
+ENSLOCK	EQU	-59
+ERANGE	EQU	-64
+EINTRN	EQU	-65
+EPLFMT	EQU	-66
+EGSBF	EQU	-67
+ELOOP	EQU	-80
+EMOUNT	EQU	-200
+
+	; F_OPEN Parameters
+
+S_READ	EQU	0
+S_WRITE	EQU	1
+S_READWRITE	EQU	2
+
+	; F_SEEK Parameters
+
+SEEK_SET	EQU	0
+SEEK_CUR	EQU	1
+SEEK_END	EQU	2
+
+	; M_XALLOC Parameters
+
+MX_STRAM	EQU	0
+MX_TTRAM	EQU	1
+MX_PREFSTRAM	EQU	2
+MX_PREFTTRAM	EQU	3
+
+MX_HEADER	EQU	0<<4
+MX_PRIVATE	EQU	1<<4
+MX_GLOBAL	EQU	2<<4
+MX_SUPERVISOR	EQU	3<<4
+MX_READABLE	EQU	4<<4
+
+; --------------------- BIOS --------------------------------------------------
+
+;	BIOS's Error Codes
+
+	; Look for the First Part in the GEMDOS Section
+
+E_OK	EQU	0
+ERROR	EQU	-1
+EDRVNR	EQU	-2
+EUNCMD	EQU	-3
+E_CRC	EQU	-4
+EBADRQ	EQU	-5
+E_SEEK	EQU	-6
+EMEDIA	EQU	-7
+ESECNF	EQU	-8
+EPAPER	EQU	-9
+EWRITF	EQU	-10
+EREADF	EQU	-11
+EWRPRO	EQU	-12
+E_CHNG	EQU	-14
+EUNDEV	EQU	-15
+EBADSF	EQU	-16
+EOTHER	EQU	-17
+
+;	BOOT Sector Structure
+
+BPS	EQU	$0B	; octets par secteur
+SPC	EQU	$0D	; secteurs par cluster
+RES	EQU	$0E	; secteurs rÇservÇs
+NFATS	EQU	$10	; fats
+NDIRS	EQU	$11	; fichiers par rÇpertoire racine
+NSECTS	EQU	$13	; secteurs par unitÇ
+MEDIA	EQU	$15	; type du support
+SPF	EQU	$16	; secteurs par fat
+SPT	EQU	$18	; faces de l'unitÇ
+NSIDES	EQU	$1A	; faces de l'unitÇ
+NHID	EQU	$1C	; nombre de secteurs cachÇs
+
+M_LINK	EQU	0
+M_START	EQU	4
+M_LENGTH	EQU	8
+M_OWN	EQU	12
+
+MP_MFL	EQU	0
+MP_MAL	EQU	4
+MP_ROVER	EQU	8
+
+	; Standart Devices Handle
+
+DEV_PRINTER	EQU	0
+DEV_AUX	EQU	1
+DEV_CONSOLE	EQU	2
+DEV_MIDI	EQU	3
+DEV_IKBD	EQU	4
+DEV_RAW	EQU	5
+
+	; Extended Devices Handle (Falcon030)
+	
+XDEV_STDSERIAL	EQU	6
+XDEV_SCCBUNUSED	EQU	7
+XDEV_SCCALAN	EQU	8
+
+RW_READ	EQU	0
+RW_WRITE	EQU	1
+RW_NOMEDIACH	EQU	2
+RW_NORETRIES	EQU	4
+RW_NOTRANSLATE	EQU	8
+
+VEC_INQUIRE	EQU	-1
+VEC_BUSERROR	EQU	2
+VEC_ADRESSERROR	EQU	3
+VEC_ILLEGAL	EQU	4
+VEC_GEMDOS	EQU	32+1
+VEC_GEM	EQU	32+2
+VEC_BIOS	EQU	32+13
+VEC_XBIOS	EQU	32+14
+VEC_TIMER	EQU	256+0
+VEC_CRITICALERR	EQU	256+1
+VEC_TERMINATE	EQU	256+2
+
+	RsReset
+BPB_recsiz	rs.w	1
+BPB_clsiz	rs.w	1
+BPB_clsizb	rs.w	1
+BPB_rdlen	rs.w	1
+BPB_fsiz	rs.w	1
+BPB_fatrec	rs.w	1
+BPB_datrec	rs.w	1
+BPB_numcl	rs.w	1
+BPB_bflags	rs.w	1
+SIZEOF_BPB	rs.w	1
+
+MED_NOCHANGE	EQU	0
+MED_UNKNOWN	EQU	1
+MED_CHANGED	EQU	2
+
+;K_RSHIFT	EQU	1
+;K_LSHIFT	EQU	2
+;K_CTRL	EQU	4
+;K_ALT	EQU	8
+;K_CAPSLOCK	EQU	16
+;K_CLRHOME	EQU	32
+;K_INSERT	EQU	64
+
+; --------------------- XBIOS -------------------------------------------------
+
+BMAP_CHECK	EQU	0
+BMAP_INQUIRE	EQU	-1
+BMAP_MAPTAB	EQU	-2
+
+BLIT_SOFT	EQU	0
+BLIT_HARD	EQU	1
+
+PLAY_ENABLE	EQU	1
+PLAY_REPEAT	EQU	2
+RECORD_ENABLE	EQU	4
+RECORD_REPEAT	EQU	8
+
+CURS_HIDE	EQU	0
+CURS_SHOW	EQU	1
+CURS_BLINK	EQU	2
+CURS_NOBLINK	EQU	3
+CURS_SETRATE	EQU	4
+CURS_GETRATE	EQU	5
+
+DMAPLAY	EQU	0
+DSPXMIT	EQU	1
+EXTINP	EQU	2
+ADC	EQU	3
+DMAREC	EQU	1
+DSPRECV	EQU	2
+EXTOUT	EQU	4
+DAC	EQU	8
+CLK_25M	EQU	0
+CLK_EXT	EQU	1
+CLK_32M	EQU	2
+CLK_COMPAT	EQU	0
+CLK_50K	EQU	1
+CLK_33K	EQU	2
+CLK_25K	EQU	3
+CLK_20K	EQU	4
+CLK_16K	EQU	5
+CLK_12K	EQU	7
+CLK_10K	EQU	9
+CLK_8K	EQU	11
+HANDSHAKE	EQU	0
+NO_SHAKE	EQU	1
+
+SND_RESET	EQU	1
+
+DS_INQUIRE	EQU	-1
+
+HF_CLEAR	EQU	0
+HF_SET	EQU	1
+HF_INQUIRE	EQU	-1
+
+ICR_RXDF	EQU	0
+ICR_TXDE	EQU	1
+ICR_TRDY	EQU	2
+ICR_HF2	EQU	3
+ICR_HF3	EQU	4
+ICR_DMA	EQU	6
+ICR_HREQ	EQU	7
+
+RTS_OFF	EQU	1
+RTR_OFF	EQU	2
+
+DSPSEND_NOTHING	EQU	0
+DSP_SEND_ZERO	EQU	$FF000000
+
+DSP_TRISTATE	EQU	0
+DSP_ENABLE	EQU	1
+
+FRATE_6	EQU	0
+FRATE_12	EQU	1
+FRATE_2	EQU	2
+FRATE_3	EQU	3
+
+FLOP_DRIVEA	EQU	0
+FLOP_DRIVEB	EQU	1
+
+PSG_APITCHLOW	EQU	0
+PSG_APITCHHIGH	EQU	1
+PSG_BPITCHLOW	EQU	2
+PSG_BPITCHHIGH	EQU	3
+PSG_CPITCHLOW	EQU	4
+PSG_CPITCHHIGH	EQU	5
+PSG_NOISEPITCH	EQU	6
+PSG_MODE	EQU	7
+PSG_AVOLUME	EQU	8
+PSG_BVOLUME	EQU	9
+PSG_CVOLUME	EQU	10
+PSG_FREQLOW	EQU	11
+PSG_FREQHIGH	EQU	12
+PSG_ENVELOPE	EQU	13
+PSG_PORTA	EQU	14
+PSG_PORTB	EQU	15
+
+GPIO_INQUIRE	EQU	0
+GPIO_READ	EQU	1
+GPIO_WRITE	EQU	2
+
+IM_DISABLE	EQU	0
+IM_RELATIVE	EQU	1
+IM_ABSOLUTE	EQU	2
+IM_KEYCODE	EQU	4
+
+IO_SERIAL	EQU	0
+IO_KEYBOARD	EQU	1
+IO_MIDI	EQU	2
+
+SNDLOCKED	EQU	-129
+
+MFP_PARALLEL	EQU	0
+MFP_DCD	EQU	1
+MFP_CTS	EQU	2
+MFP_BITBLT	EQU	3
+MFP_TIMERD	EQU	4
+MFP_TIMERC	EQU	5
+MFP_ACIA	EQU	6
+MFP_DISK	EQU	7
+MFP_TIMERB	EQU	8
+MFP_TERR	EQU	9
+MFP_TBE	EQU	10
+MFP_RERR	EQU	11
+MFP_RBF	EQU	12
+MFP_TIMERA	EQU	13
+MFP_RING	EQU	14
+MFP_MONODETECT	EQU	15
+
+NVM_READ	EQU	0
+NVM_WRITE	EQU	1
+NVM_RESET	EQU	2
+
+GI_FLOPPYSIDE	EQU	1
+GI_FLOPPYA	EQU	2
+GI_FLOPPYB	EQU	4
+GI_RTS	EQU	8
+GI_DTR	EQU	16
+GI_STROBE	EQU	32
+GI_GPO	EQU	64
+GI_SCCPORT	EQU	128
+
+INT_TIMERA	EQU	0
+INT_I7	EQU	1
+INT_DISABLE	EQU	0
+INT_PLAY	EQU	1
+INT_RECORD	EQU	2
+INT_BOTH	EQU	3
+
+MODE_STEREO8	EQU	0
+MODE_STEREO16	EQU	1
+MODE_MONO	EQU	2
+
+SNDINQUIRE	EQU	-1
+LTATTEN	EQU	0
+RTATTEN	EQU	1
+LTGAIN	EQU	2
+RTGAIN	EQU	3
+ADDERIN	EQU	4
+ADCINPUT	EQU	5
+SETPRESCALE	EQU	6
+ADDR_ADC	EQU	1
+ADDR_MATRIX	EQU	2
+LEFT_MIC	EQU	0
+LEFT_PSG	EQU	1
+RIGHT_MIC	EQU	0
+RIGHT_PSG	EQU	2
+CCLK_6K	EQU	0
+CCLK_12K	EQU	1
+CCLK_25K	EQU	2
+CCLK_50K	EQU	3
+
+SNDNOTLOCK	EQU	-128
+
+MON_MONO	EQU	0
+MON_COLOR	EQU	1
+MON_VGA	EQU	2
+MON_TV	EQU	3
+
+OVERLAY_ON	EQU	1
+OVERLAY_OFF	EQU	0
+
+BPS1	EQU	0
+BPS2	EQU	1
+BPS4	EQU	2
+BPS8	EQU	3
+BPS16	EQU	4
+COL80	EQU	8
+COL40	EQU	0
+VGA	EQU	16
+TV	EQU	0
+PAL	EQU	32
+NTSC	EQU	0
+OVERSCAN	EQU	64
+STMODES	EQU	128
+VERTFLAG	EQU	256
+
+;_interlace	EQU	256
+;_stcompatible	EQU	128
+;_overscan	EQU	64
+;_pal	EQU	32
+;_vga	EQU	16
+;_columns80	EQU	8
+;_colortrue	EQU	4
+;_color256	EQU	3
+;_color16	EQU	2
+;_color4	EQU	1
+;_color2	EQU	0
+
+VCLK_EXTERNAL	EQU	1
+VCLK_EXTVSYNC	EQU	2
+VCLK_EXTHSYNC	EQU	4
+
+WP_MONO	EQU	0
+WP_STEREO	EQU	1
+WP_8BIT	EQU	0
+WP_16BIT	EQU	2
+WP_MACRO	EQU	256
+AG_FIND	EQU	0
+AG_REPLACE	EQU	1
+AG_CUT	EQU	2
+AG_COPY	EQU	3
+AG_PASTE	EQU	4
+AG_DELETE	EQU	5
+AG_HELP	EQU	6
+AG_PRINT	EQU	7
+AG_SAVE	EQU	8
+AG_ERROR	EQU	9
+AG_QUIT	EQU	10
+
+XB_TIMERA	EQU	0
+XB_TIMERB	EQU	1
+XB_TIMERC	EQU	2
+XB_TIMERD	EQU	3
+
+; --------------------- VDI ---------------------------------------------------
+
+IMAGE_LEFT	EQU	0
+IMAGE_CENTER	EQU	1
+IMAGE_RIGHT	EQU	2
+IMAGE_TOP	EQU	0
+IMAGE_BOTTOM	EQU	2
+
+OTHER_COLOR	EQU	-1
+
+NOJUSTIFY	EQU	0
+JUSTIFY	EQU	1
+
+COLOR_REQUESTED	EQU	0
+COLOR_ACTUAL	EQU	1
+
+GDOS_NONE	EQU	-2
+GDOS_FNT	EQU	'_FNT'
+GDOS_FSM	EQU	'_FSM'
+
+LOCATOR	EQU	1
+VALUATOR	EQU	2
+CHOICE	EQU	3
+STRING	EQU	4
+
+DEV_INSTALLED	EQU	1
+DEV_MISSING	EQU	0
+
+OUTLINE_FONT	EQU	1
+BITMAP_FONT	EQU	0
+
+ALL_WHITE	EQU	0
+S_AND_D	EQU	1
+S_AND_NOTD	EQU	2
+S_ONLY	EQU	3
+NOTS_AND_D	EQU	4
+D_ONLY	EQU	5
+S_XOR_D	EQU	6
+S_OR_D	EQU	7
+NOT_SORD	EQU	8
+NOT_SXORD	EQU	9
+NOT_D	EQU	10
+S_OR_NOTD	EQU	11
+NOT_S	EQU	12
+NOTS_OR_D	EQU	13
+NOT_SANDD	EQU	14
+ALL_BLACK	EQU	15
+
+CLIP_OFF	EQU	0
+CLIP_ON	EQU	1
+
+FIS_HOLLOW	EQU	0
+FIS_SOLID	EQU	1
+FIS_PATTERN	EQU	2
+FIS_HATCH	EQU	3
+FIS_USER	EQU	4
+
+PERIMETER_OFF	EQU	0
+PERIMETER_ON	EQU	1
+
+SQUARE	EQU	0
+ARROWED	EQU	1
+ROUND	EQU	2
+
+SOLID	EQU	0
+LDASHED	EQU	1
+DOTTED	EQU	2
+DASHDOT	EQU	3
+DASH	EQU	4
+DASHDOTDOT	EQU	5
+USERLINE	EQU	6
+
+MRKR_DOT	EQU	1
+MRKR_PLUS	EQU	2
+MRKR_ASTERISK	EQU	3
+MRKR_BOX	EQU	4
+MRKR_CROSS	EQU	5
+MRKR_DIAMOND	EQU	6
+
+VA_TOP	EQU	5
+VA_ASCENT	EQU	2
+VA_HALF	EQU	1
+VA_BASE	EQU	0
+VA_DESCENT	EQU	4
+VA_BOTTOM	EQU	3
+
+HA_LEFTJUST	EQU	0
+HA_CENTJUST	EQU	1
+HA_RIGHTJUST	EQU	2
+
+THICKENED	EQU	0
+LIGHT	EQU	1
+SKEWED	EQU	2
+UNDERLINED	EQU	3
+;OUTLINED	EQU	4
+;SHADOWED	EQU	5
+
+SCREEN_ERROR	EQU	1
+NO_ERROR	EQU	0
+CHAR_NOT_FOUND	EQU	1
+FILE_READERR	EQU	8
+FILE_OPENERR	EQU	9
+BAD_FORMAT	EQU	10
+CACHE_FULL	EQU	11
+MISC_ERROR	EQU	-1
+
+TRACK_NONE	EQU	0
+TRACK_NORMAL	EQU	1
+TRACK_TIGHT	EQU	2
+TRACK_VERYTIGHT	EQU	3
+
+SCRATCH_BOTH	EQU	0
+SCRATCH_BITMAP	EQU	1
+SCRATCH_NONE	EQU	2
+
+MD_REPLACE	EQU	1
+MD_TRANS	EQU	2
+MD_XOR	EQU	3
+MD_ERASE	EQU	4
+
+; --------------------- AES ---------------------------------------------------
+
+;	OBJECTS
+
+NORMAL	EQU	0
+
+SELECTABLE	EQU	1
+DEFAULT	EQU	2
+EXIT	EQU	4
+EDITABLE	EQU	8
+RBUTTON	EQU	16
+LASTOB	EQU	32
+TOUCHEXIT	EQU	64
+HIDETREE	EQU	128
+INDIRECT	EQU	256
+
+SELECTED	EQU	1
+CROSSED	EQU	2
+CHECKED	EQU	4
+DISABLED	EQU	8
+OUTLINED	EQU	16
+SHADOWED	EQU	32
+
+G_BOX	EQU	20
+G_TEXT	EQU	21
+G_BOXTEXT	EQU	22
+G_IMAGE	EQU	23
+G_USERDEF	EQU	24
+G_IBOX	EQU	25
+G_BUTTON	EQU	26
+G_BOXCHAR	EQU	27
+G_STRING	EQU	28
+G_FTEXT	EQU	29
+G_FBOXTEXT	EQU	30
+G_ICON	EQU	31
+G_TITLE	EQU	32
+
+;	APPLICATION SERVICE
+
+AES_LARGEFONT	EQU	0
+AES_SMALLFONT	EQU	1
+AES_SYSTEM	EQU	2
+AES_LANGUAGE	EQU	3
+AES_PROCESS	EQU	4
+AES_PCGEM	EQU	5
+AES_INQUIRE	EQU	6
+AES_MOUSE	EQU	8
+AES_MENU	EQU	9
+AES_SHELL	EQU	10
+AES_WINDOW	EQU	11
+AES_MESSAGE	EQU	12
+AES_OBJECT	EQU	13
+AES_FORM	EQU	14
+
+APP_FIRST	EQU	0
+APP_NEXT	EQU	1
+APP_SYSTEM	EQU	1
+APP_APPLICATION	EQU	2
+APP_ACCESSORY	EQU	4
+APP_SHELL	EQU	8
+
+APPEVNT_TIMER	EQU	0
+APPEVNT_BUTTON	EQU	1
+APPEVNT_MOUSE	EQU	2
+APPEVNT_KEYBOARD	EQU	3
+
+;	EVENTS
+
+LEFT_BUTTON	EQU	1
+RIGHT_BUTTON	EQU	2
+MIDDLE_BUTTON	EQU	4
+OTHER_BUTTON	EQU	8
+K_RSHIFT	EQU	1
+K_LSHIFT	EQU	2
+K_CTRL	EQU	4
+K_ALT	EQU	8
+
+MN_SELECTED	EQU	10
+WM_REDRAW	EQU	20
+WM_TOPPED	EQU	21
+WM_CLOSED	EQU	22
+WM_FULLED	EQU	23
+WM_ARROWED	EQU	24
+WM_HSLID	EQU	25
+WM_VSLID	EQU	26
+WM_SIZED	EQU	27
+WM_MOVED	EQU	28
+WM_NEWTOP	EQU	29
+WM_UNTOPPED	EQU	30
+WM_ONTOP	EQU	31
+WM_BOTTOM	EQU	33
+WM_ICONIFY	EQU	34
+WM_UNICONIFY	EQU	35
+WM_ALLICONIFY	EQU	36
+WM_TOOLBAR	EQU	37
+AC_OPEN	EQU	40
+AC_CLOSE	EQU	41
+AP_TERM	EQU	50
+AP_TFAIL	EQU	51
+SHUT_COMPLETED	EQU	60
+RESCH_COMPLETED	EQU	61
+AP_DRAGDROP	EQU	63
+SH_WDRAW	EQU	72
+CH_EXIT	EQU	90
+
+WA_UPPAGE	EQU	0
+WA_DNPAGE	EQU	1
+WA_UPLINE	EQU	2
+WA_DNLINE	EQU	3
+WA_LFPAGE	EQU	4
+WA_RTPAGE	EQU	5
+WA_LFLINE	EQU	6
+WA_RTLINE	EQU	7
+
+MO_ENTER	EQU	0
+MO_LEAVE	EQU	1
+
+MU_KEYBD	EQU	0
+MU_BUTTON	EQU	1
+MU_M1	EQU	2
+MU_M2	EQU	3
+MU_MESAG	EQU	4
+MU_TIMER	EQU	5
+
+;	FORMS
+
+FMD_START	EQU	0
+FMD_GROW	EQU	1
+FMD_SHRINK	EQU	2
+FMD_FINISH	EQU	3
+
+FERR_FILENOTFOUND	EQU	2
+FERR_PATHNOTFOUND	EQU	3
+FERR_NOHANDLES	EQU	4
+FERR_ACCESSDENIED	EQU	5
+FERR_LOWMEM	EQU	8
+FERR_BADENVIRON	EQU	10
+FERR_BADFORMAT	EQU	11
+FERR_BADDRIVE	EQU	15
+FERR_DELETEDIR	EQU	16
+FERR_NOFILES	EQU	18
+
+;	FILE SELECTORS
+
+FSEL_CANCEL	EQU	0
+FSEL_OK	EQU	1
+
+;	GRAPHICS
+
+ARROW	EQU	0
+TEXT_CRSR	EQU	1
+BUSY_BEE	EQU	2
+POINT_HAND	EQU	3
+FLAT_HAND	EQU	4
+THIN_CROSS	EQU	5
+THICK_CROSS	EQU	6
+OUTLN_CROSS	EQU	7
+USER_DEF	EQU	255
+M_OFF	EQU	256
+M_ON	EQU	257
+M_SAVE	EQU	258
+M_LAST	EQU	259
+M_RESTORE	EQU	260
+
+;	MENU
+
+ME_INQUIRE	EQU	0
+ME_ATTACH	EQU	1
+ME_REMOVE	EQU	2
+
+MENU_REMOVE	EQU	0
+MENU_INSTALL	EQU	1
+MENU_INQUIRE	EQU	-1
+
+UNCHECK	EQU	0
+CHECK	EQU	1
+
+DISABLE	EQU	0
+ENABLE	EQU	1
+
+SCROLL_LISTBOX	EQU	-1
+
+REG_NEWNAME	EQU	-1
+
+HIGHLIGHT	EQU	0
+UNHIGHLIGHT	EQU	1
+
+;	OBJECTS
+
+NO_DRAW	EQU	0
+REDRAW	EQU	1
+
+ED_START	EQU	0
+ED_INIT	EQU	1
+ED_CHAR	EQU	2
+ED_END	EQU	3
+
+OO_LAST	EQU	-1
+OO_FIRST	EQU	0
+
+SV_INQUIRE	EQU	0
+SV_SET	EQU	1
+LK3DIND	EQU	1
+LK3DACT	EQU	2
+INDBUTCOL	EQU	3
+ACTBUTCOL	EQU	4
+BACKGRCOL	EQU	5
+AD3DVAL	EQU	6
+
+;	RESOURCES
+
+R_TREE	EQU	0
+R_OBJECT	EQU	1
+R_TEDINFO	EQU	2
+R_ICONBLK	EQU	3
+R_BITBLK	EQU	4
+R_STRING	EQU	5
+R_IMAGEDATA	EQU	6
+R_OBSPEC	EQU	7
+R_TEPTEXT	EQU	8
+R_TEPMPLT	EQU	9
+R_TEPVALID	EQU	10
+R_IBPMASK	EQU	11
+R_IBPDATA	EQU	12
+R_IBPTEXT	EQU	13
+R_BIPDATA	EQU	14
+R_FRSTR	EQU	15
+R_FRIMG	EQU	16
+
+;	SCRAP
+
+;	SHELL
+
+SHEL_BUFSIZE	EQU	-1
+
+SWM_LAUCH	EQU	0
+SWM_LAUCHNOW	EQU	1
+SWM_LAUCHACC	EQU	3
+SWM_SHUTDOWN	EQU	4
+SWM_REZCHANGE	EQU	5
+SWM_BROADCAST	EQU	7
+SWM_ENVIRON	EQU	8
+SWM_NEWMSG	EQU	9
+SWM_AESMSG	EQU	10
+
+;	WINDOWS
+
+WC_BORDER	EQU	0
+WC_WORK	EQU	1
+
+NAME	EQU	1
+CLOSER	EQU	2
+FULLER	EQU	4
+MOVER	EQU	8
+INFO	EQU	16
+SIZER	EQU	32
+UPARROW	EQU	64
+DNARROW	EQU	128
+VSLIDE	EQU	256
+LFARROW	EQU	512
+RTARROW	EQU	1024
+HSLIDE	EQU	2048
+SMALLER	EQU	16384
+
+WF_NAME	EQU	2
+WF_INFO	EQU	3
+WF_WORKXYWH	EQU	4
+WF_CURRXYWH	EQU	5
+WF_PREVXYWH	EQU	6
+WF_FULLXYWH	EQU	7
+WF_HSLIDE	EQU	8
+WF_VSLIDE	EQU	9
+WF_TOP	EQU	10
+WF_FIRSTXYWH	EQU	11
+WF_NEXTXYWH	EQU	12
+WF_NEWDESK	EQU	14
+WF_HSLSIZE	EQU	15
+WF_VSLSIZE	EQU	16
+WF_SCREEN	EQU	17
+WF_COLOR	EQU	18
+WF_DCOLOR	EQU	19
+WF_OWNER	EQU	20
+WF_BEVENT	EQU	24
+WF_BOTTOM	EQU	25
+WF_ICONIFY	EQU	26
+WF_UNICONIFY	EQU	27
+WF_UNICONIFYXYWH	EQU	28
+WF_TOOLBAR	EQU	30
+WF_FTOOLBAR	EQU	31
+WF_NTOOLBAR	EQU	32
+
+END_UPDATE	EQU	0
+BEG_UPDATE	EQU	1
+END_MCTRL	EQU	2
+BEG_MCTRL	EQU	3
+
+; --------------------- MINT --------------------------------------------------
+
+F_DUPFD	EQU	0
+F_GETFD	EQU	1
+F_SETFD	EQU	2
+F_GETFL	EQU	3
+F_SETFL	EQU	4
+F_GETLK	EQU	5
+F_SETLK	EQU	6
+F_SETLKW	EQU	7
+
+FSTAT	EQU	"F"<<8+0
+FIONREAD	EQU	"F"<<8+1
+FIONWRITE	EQU	"F"<<8+2
+
+SHMGETBLK	EQU	"M"<<8+0
+SHMSETBLK	EQU	"M"<<8+1
+
+PPROCADDR	EQU	"P"<<8+1
+PBASEADDR	EQU	"P"<<8+2
+PCTXTSIZE	EQU	"P"<<8+3
+PSETFLAGS	EQU	"P"<<8+4
+PGETFLAGS	EQU	"P"<<8+5
+PTRACEGFLAGS	EQU	"P"<<8+6
+PTRACESFLAGS	EQU	"P"<<8+7
+PTRACEGO	EQU	"P"<<8+8
+PTRACEFLOW	EQU	"P"<<8+9
+PTRACESTEP	EQU	"P"<<8+10
+PLOADINFO	EQU	"P"<<8+12
+
+TIOCGETP	EQU	"T"<<8+0
+TIOCSETP	EQU	"T"<<8+1
+TIOCGETC	EQU	"T"<<8+2
+TIOCSETC	EQU	"T"<<8+3
+TIOCGLTC	EQU	"T"<<8+4
+TIOCSLTC	EQU	"T"<<8+5
+TIOCGPGRP	EQU	"T"<<8+6
+TIOCSPGRP	EQU	"T"<<8+7
+TIOCSTOP	EQU	"T"<<8+9
+TIOCSTART	EQU	"T"<<8+10
+TIOCGWINSZ	EQU	"T"<<8+11
+TIOCSWINSZ	EQU	"T"<<8+12
+TIOCGXKEY	EQU	"T"<<8+13
+TIOCSXKEY	EQU	"T"<<8+14
+TIOCIBAUD	EQU	"T"<<8+18
+TIOCOBAUD	EQU	"T"<<8+19
+TIOCCBRK	EQU	"T"<<8+20
+TIOCSBRK	EQU	"T"<<8+21
+TIOCGFLAGS	EQU	"T"<<8+22
+TIOCSFLAGS	EQU	"T"<<8+23
+
+TCURSOFF	EQU	"c"<<8+0
+TCURSON	EQU	"c"<<8+1
+TCURSBLINK	EQU	"c"<<8+2
+TCURSSTEADY	EQU	"c"<<8+3
+TCURSSRATE	EQU	"c"<<8+4
+TCURSGRATE	EQU	"c"<<8+5
+
+DOMAIN_TOS	EQU	0
+DOMAIN_MINT	EQU	1
+
+; --------------------- INTEL -------------------------------------------------
+; --------------------- TOSUTIL -----------------------------------------------
+; --------------------- SSAVCALL ----------------------------------------------
+
+	; Date Format :	 AAAAAAAmmmmJJJJJ
+ASSEMBLY_DATE	EQU	((ASSEMBLY_YEAR-1980)<<9)|(ASSEMBLY_MONTH<<5)|(ASSEMBLY_DAY)
+
+
+; /////////////////////////////////////////////////////////////////////////////
+	SECTION	TEXT
+; /////////////////////////////////////////////////////////////////////////////
+
+; --------------------- GEMDOS ------------------------------------------------
+
+P_TERM0	MACRO
+
+	clr	-(SP)	; - P_TERM0 -
+	trap	#1	; *** GEMDOS ***
+
+	ENDM
+
+; +++
+
+C_CONIN	MACRO
+
+	move.w	#1,-(SP)	; - C_CONIN -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_CONOUT	MACRO	char
+
+	move.w	\1,-(SP)
+	move.w	#2,-(SP)	; - C_CONOUT -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+C_AUXIN	MACRO
+
+	move.w	#3,-(SP)	; - C_AUXIN -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_AUXOUT	MACRO	char
+
+	move.w	\1,-(SP)
+	move.w	#4,-(SP)	; - C_AUXOUT -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+C_PRNOUT	MACRO	char
+
+	move.w	\1,-(SP)
+	move.w	#5,-(SP)	; - C_PRNOUT -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+C_RAWIO	MACRO	char
+
+	move.w	\1,-(SP)
+	move.w	#6,-(SP)	; - C_RAWIO -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+C_RAWCIN	MACRO
+
+	move.w	#7,-(SP)	; - C_RAWCIN -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_NECIN	MACRO
+
+	move.w	#8,-(SP)	; - C_NECIN -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_CONWS	MACRO	string
+
+	move.l	\1,-(SP)
+	move.w	#9,-(SP)	; - C_CONWS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+	
+C_CONRS	MACRO	buffer
+
+	move.l	\1,-(SP)
+	move.w	#10,-(SP)	; - C_CONRS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+C_CONIS	MACRO
+
+	move.w	#11,-(SP)	; - C_CONIS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+D_SETDRV	MACRO	drive
+
+	move.w	\1,-(SP)
+	move.w	#14,-(SP)	; - D_SETDRV -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+C_CONOS	MACRO
+
+	move.w	#16,-(SP)	; - C_CONOS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_PRNOS	MACRO
+
+	move.w	#17,-(SP)	; - C_PRNOS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_AUXIS	MACRO
+
+	move.w	#18,-(SP)	; - C_AUXIS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+C_AUXOS	MACRO
+
+	move.w	#19,-(SP)	; - C_AUXOS -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+M_ADDALT	MACRO	size,start
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#20,-(SP)	; - M_ADDALT -
+	trap	#1	; *** GEMDOS ***
+	lea	(10,SP),SP
+
+	ENDM
+
+; +++
+
+SCREALLOC	MACRO	
+
+	move.l	\1,-(SP)
+	move.w	#21,-(SP)	; - SCREALLOC -
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+D_GETDRV	MACRO
+
+	move.w	#25,-(SP)	; - D_GETDRV -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+F_SETDTA	MACRO	buffer
+
+	move.l	\1,-(SP)
+	move.w	#26,-(SP)	; - F_SETDTA -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+SUPER	MACRO	mode
+
+	move.l	\1,-(SP)
+	move.w	#32,-(SP)	; - SUPER -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+T_GETDATE	MACRO
+
+	move.w	#42,-(SP)	; - T_GETDATE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+T_SETDATE	MACRO	date
+
+	move.w	\1,-(SP)
+	move.w	#43,-(SP)	; - T_SETDATE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+T_GETTIME	MACRO
+
+	move.w	#44,-(SP)	; - T_GETTIME -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+T_SETTIME	MACRO	time
+
+	move.w	\1,-(SP)
+	move.w	#45,-(SP)	; - T_SETTIME -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+F_GETDTA	MACRO
+
+	move.w	#47,-(SP)	; - F_GETDTA -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+S_VERSION	MACRO
+
+	move.w	#48,-(SP)	; - S_VERSION -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+P_TERMRES	MACRO	retcode,keepcnt
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#49,-(SP)	; - P_TERMRES -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+D_FREE	MACRO	drive,buffer
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#54,-(SP)	; - D_FREE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+D_CREATE	MACRO	path
+
+	move.l	\1,-(SP)
+	move.w	#57,-(SP)	; - D_CREATE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+D_DELETE	MACRO	path
+
+	move.l	\1,-(SP)
+	move.w	#58,-(SP)	; - D_DELETE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+D_SETPATH	MACRO	path
+
+	move.l	\1,-(SP)
+	move.w	#59,-(SP)	; - D_SETPATH -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+F_CREATE	MACRO	attr,fname
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#60,-(SP)	; - F_CREATE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+F_OPEN	MACRO	mode,fname
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#61,-(SP)	; - F_OPEN -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+F_CLOSE	MACRO	fhandle
+
+	move.w	\1,-(SP)
+	move.w	#62,-(SP)	; - F_CLOSE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+F_READ	MACRO	buff,count,handle
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	\3,-(SP)
+	move.w	#63,-(SP)	; - F_READ -
+	trap	#1	; *** GEMDOS ***
+	lea	(12,SP),SP
+
+	ENDM
+
+; +++
+
+F_WRITE	MACRO	buff,count,handle
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	\3,-(SP)
+	move.w	#64,-(SP)	; - F_WRITE -
+	trap	#1	; *** GEMDOS ***
+	lea	(12,SP),SP
+
+	ENDM
+
+; +++
+
+F_DELETE	MACRO	fname
+
+	move.l	\1,-(SP)
+	move.w	#65,-(SP)	; - F_DELETE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+F_SEEK	MACRO	seekmode,handle,offset
+
+	move.w	\1,-(SP)
+	move.w	\2,-(SP)
+	move.l	\3,-(SP)
+	move.w	#66,-(SP)	; - F_SEEK -
+	trap	#1	; *** GEMDOS ***
+	lea	(10,SP),SP
+
+	ENDM
+
+; +++
+
+F_ATTRIB	MACRO	attrib,flag,fname
+
+	move.w	\1,-(SP)
+	move.w	\2,-(SP)
+	move.l	\3,-(SP)
+	move.w	#67,-(SP)	; - F_ATTRIB -
+	trap	#1	; *** GEMDOS ***
+	lea	(10,SP),SP
+
+	ENDM
+
+; +++
+
+M_XALLOC	MACRO	mode,amount
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#68,-(SP)	; - M_XALLOC -
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+F_DUP	MACRO	handle
+
+	move.w	\1,-(SP)
+	move.w	#69,-(SP)	; - F_DUP -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+F_FORCE	MACRO	nonstdh,stdh
+
+	move.w	\1,-(SP)
+	move.w	\2,-(SP)
+	move.w	#70,-(SP)	; - F_FORCE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+D_GETPATH	MACRO	drive,buffer
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#71,-(SP)	; - D_GETPATH -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+M_ALLOC	MACRO	amount
+
+	move.l	\1,-(SP)
+	move.w	#72,-(SP)	; - M_ALLOC -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+M_FREE	MACRO	addr
+
+	move.l	\1,-(SP)
+	move.w	#73,-(SP)	; - M_FREE -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+M_SHRINK	MACRO	newsize,start
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	clr	-(SP)
+	move.w	#74,-(SP)	; - M_SHRINK -
+	trap	#1	; *** GEMDOS ***
+	lea	(12,SP),SP
+
+	ENDM
+
+; +++
+
+P_EXEC	MACRO	envp,cmdl,prg,mode
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	move.l	\3,-(SP)
+	move.w	\4,-(SP)
+	move.w	#75,-(SP)	; - P_EXEC -
+	trap	#1	; *** GEMDOS ***
+	lea	(16,SP),SP
+
+	ENDM
+
+; +++
+
+P_TERM	MACRO	retcode
+
+	move.w	\1,-(SP)
+	move.w	#76,-(SP)	; - P_TERM -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+F_SFIRST	MACRO	attr,fname
+
+	move.w	\1,-(SP)
+	move.l	\2,-(SP)
+	move.w	#78,-(SP)	; - F_SFIRST -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+F_SNEXT	MACRO
+
+	move.w	#79,-(SP)	; - F_SNEXT -
+	trap	#1	; *** GEMDOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+F_RENAME	MACRO	newname,oldname
+
+	move.l	\1,-(SP)
+	move.l	\2,-(SP)
+	clr	-(SP)
+	move.w	#86,-(SP)	; - F_RENAME -
+	trap	#1	; *** GEMDOS ***
+	lea	(12,SP),SP
+
+	ENDM
+
+; +++
+
+F_DATIME	MACRO	wflag,handle,timeptr
+
+	move.w	\1,-(SP)
+	move.w	\2,-(SP)
+	move.l	\3,-(SP)
+	move.w	#87,-(SP)	; - F_DATIME -
+	trap	#1	; *** GEMDOS ***
+	lea	(10,SP),SP
+
+	ENDM
+
+; --------------------- BIOS --------------------------------------------------
+
+GETMPB	MACRO	pointer
+
+	move.l	\1,-(SP)
+	clr	-(SP)	; - GETMPB -
+	trap	#13	; *** BIOS ***
+	addq.l	#6,SP
+
+	ENDM
+	
+; +++
+		
+B_CONSTAT	MACRO	device
+
+	move.w	\1,-(SP)
+	move.w	#1,-(SP)	; - B_CONSTAT -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+	
+; +++
+		
+B_CONIN	MACRO	device
+
+	move.w	\1,-(SP)
+	move.w	#2,-(SP)	; - B_CONIN -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+B_CONOUT	MACRO	char,device
+
+	move.w	\1,-(SP)
+	move.w	#\2,-(SP)
+	move.w	#3,-(SP)	; - B_CONOUT -
+	trap	#13	; *** BIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+RWABS	MACRO
+
+	IFEQ	NARG-6
+	move.l	\6,-(SP)
+	ENDC
+	
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#4,-(SP)	; - RWABS -
+	trap	#13	; *** BIOS ***
+	lea	14(SP),SP
+
+	ENDM
+
+; +++
+
+SETEXC	MACRO
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#5,-(SP)	; - SETEXC -
+	trap	#13	; *** BIOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+TICKCAL	MACRO
+
+	move.w	#6,-(SP)	; - TICKCAL -
+	trap	#13	; *** BIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+GETBPB	MACRO
+
+	move.w	\1,-(SP)
+	move.w	#7,-(SP)	; - GETBPB -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+BCOSTAT	MACRO
+
+	move.w	\1,-(SP)
+	move.w	#8,-(SP)	; - BCOSTAT -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+MEDIACH	MACRO
+
+	move.w	\1,-(SP)
+	move.w	#9,-(SP)	; - MEDIACH -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+DRVMAP	MACRO
+
+	move.w	#10,-(SP)	; - DRVMAP -
+	trap	#13	; *** BIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+KBSHIFT	MACRO
+
+	move.w	\1,-(SP)
+	move.w	#11,-(SP)	; - KBSHIFT -
+	trap	#13	; *** BIOS ***
+	addq.l	#4,SP
+
+	ENDM
+		
+; --------------------- XBIOS -------------------------------------------------
+
+;	ST FUNCTIONS
+
+INITMOUS	MACRO	type,parametres,vecteur
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	clr	-(SP)	; - INITMOUSE -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+		
+SSBRK	MACRO	nombre
+
+	move.w	\1,-(SP)
+	move.w	#1,-(SP)	; - SSBRK -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+PHYSBASE	MACRO	
+
+	move.w	#2,-(SP)	; - PHYSBASE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+LOGBASE	MACRO
+
+	move.w	#3,-(SP)	; - LOGBASE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+		
+GETREZ	MACRO
+
+	move.w	#4,-(SP)	; - GETREZ -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+		
+; +++
+
+SETSCREEN	MACRO	logadr,physadr,rez,modecode
+
+	IFEQ	NARG-4
+	move.w	\4,-(SP)
+	ENDC
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#5,-(SP)	; - SETSCREEN -
+	trap	#14	; *** XBIOS ***
+	IFEQ	NARG-4
+	lea	14(SP),SP
+	ELSE
+	lea	12(SP),SP
+	ENDC
+
+	ENDM
+
+; +++
+
+SETPALETTE	MACRO	paletteptr
+
+	move.l	\1,-(SP)
+	move.w	#6,-(SP)	; - SETPALETTE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+		
+SETCOLOR	MACRO	colornum,color
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#7,-(SP)	; - SETCOLOR -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+		
+; +++
+
+FLOPRD	MACRO	buffer,filler,dev,secteur,piste,face,count
+
+	move.w	\7,-(SP)
+	move.w	\6,-(SP)
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#8,-(SP)	; - FLOPRD -
+	trap	#14	; *** XBIOS ***
+	lea	20(SP),SP
+
+	ENDM
+
+; +++
+
+FLOPWR	MACRO	buffer,filler,dev,secteur,piste,face,count
+
+	move.w	\7,-(SP)
+	move.w	\6,-(SP)
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#9,-(SP)	; - FLOPWR -
+	trap	#14	; *** XBIOS ***
+	lea	20(SP),SP
+
+	ENDM
+
+; +++
+
+FLOPFMT	MACRO	buffer,filler,dev,SPt,piste,face,interleave,magic,virgin
+
+	move.w	\9,-(SP)
+	move.l	\8,-(SP)
+	move.w	\7,-(SP)
+	move.w	\6,-(SP)
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#10,-(SP)	; - FLOPFMT -
+	trap	#14	; *** XBIOS ***
+	lea	26(SP),SP
+
+	ENDM
+
+; +++
+		
+MIDIWS	MACRO	count,ptr
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#12,-(SP)	; - MIDIWS -
+	trap	#14	; *** XBIOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+		
+MFPINT	MACRO	numero,vecteur
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#13,-(SP)	; - MFPINT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+		
+IOREC	MACRO	device
+
+	move.w	\1,-(SP)
+	move.w	#14,-(SP)	; - IOREC -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+		
+RSCONF	MACRO	baud,ctrl,ucr,rsr,tsr,scr
+
+	move.w	\6,-(SP)
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#15,-(SP)	; - RSCONF -
+	trap	#14	; *** XBIOS ***
+	lea	14(SP),SP
+
+	ENDM
+
+; +++
+
+KEYTBL	MACRO	unshift,shift,capslock
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#16,-(SP)	; - KEYTBL -
+	trap	#14	; *** XBIOS ***
+	lea	14(SP),SP
+
+	ENDM
+
+; +++
+
+RANDOM	MACRO
+
+	move.w	#17,-(SP)	; - RANDOM -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+		
+PROTOBT	MACRO	buffer,serialnr,typedisque,execflag
+
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#18,-(SP)	; - PROTOBT -
+	trap	#14	; *** XBIOS ***
+	lea	14(SP),SP
+
+	ENDM
+
+; +++
+		
+FLOPVER	MACRO	buffer,filler,dev,secteur,piste,face,count
+
+	move.w	\7,-(SP)
+	move.w	\6,-(SP)
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#19,-(SP)	; - FLOPVER -
+	trap	#14	; *** XBIOS ***
+	lea	16(SP),SP
+
+	ENDM
+
+; +++
+		
+SCRDMP	MACRO
+
+	move.w	#20,-(SP)	; - SCRDMP -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+	
+; +++
+		
+CURSCONF	MACRO	fonction,rate
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#21,-(SP)	; - CURSCONF -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+SETTIME	MACRO	time
+
+	move.l	\1,-(SP)
+	move.w	#22,-(SP)	; - SETTIME -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+GETTIME	MACRO
+
+	move.w	#23,-(SP)	; - GETTIME -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+BIOSKEYS	MACRO
+
+	move.w	#24,-(SP)	; - BIOSKEYS -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+IKBDWS	MACRO	nombre,pointeur
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#25,-(SP)	; - IKBDWS -
+	trap	#14	; *** XBIOS ***
+	addq.l	#8,SP
+
+	ENDM
+
+; +++
+
+JDISINT	MACRO	number
+
+	move.w	\1,-(SP)
+	move.w	#26,-(SP)	; - JDISINT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+JENABINT	MACRO	number
+	move.w	\1,-(SP)
+	move.w	#27,-(SP)	; - JENABINT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+GIACCESS	MACRO	donnees,registre
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#28,-(SP)	; - GIACCESS -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+OFFGIBIT	MACRO	masquebits
+
+	move.w	\1,-(SP)
+	move.w	#29,-(SP)	; - OFFGIBIT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+ONGIBIT	MACRO	masquebits
+	move.w	\1,-(SP)
+	move.w	#30,-(SP)	; - ONGIBIT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+MFPINT	MACRO	timer,control,data,vector
+
+	move.l	\4,-(SP)
+	move.w	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#31,-(SP)	; - MFPINT -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DOSOUND	MACRO	pointeur
+
+	move.l	\1,-(SP)
+	move.w	#32,-(SP)	; - DOSOUND -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+		
+SETPRT	MACRO	config
+
+	move.w	\1,-(SP)
+	move.w	#33,-(SP)	; - SETPRT -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+KBDVBASE	MACRO
+
+	move.w	#34,-(SP)	; - KBDVBASE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+KBRATE	MACRO	kbrate
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#35,-(SP)	; - KBRATE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+PRTBLK	MACRO	parametres
+
+	move.l	\1,-(SP)
+	move.w	#36,-(SP)	; - PRTBLK -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+VSYNC	MACRO
+
+	move.w	#37,-(SP)	; - VSYNC -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+SUPEXEC	MACRO	adresse
+
+	move.l	\1,-(SP)
+	move.w	#38,-(SP)	; - SUPEXEC -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+
+; +++
+
+PUNTAES	MACRO
+
+	move.w	#39,-(SP)	; - PUNTAES -
+	trap	#14	; *** XBIOS ***
+	addq.l	#2,SP
+
+	ENDM
+
+; +++
+
+BLITMODE	MACRO	flag
+
+	move.w	\1,-(SP)
+	move.w	#64,-(SP)	; - BLITMODE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#4,SP
+
+	ENDM
+
+; +++
+
+FLOPRATE	MACRO	dev,newrate
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#41,-(SP)	; - FLOPRATE -
+	trap	#14	; *** XBIOS ***
+	addq.l	#6,SP
+
+	ENDM
+	
+;	FALCON030 FUNCTIONS
+
+BCONMAP	MACRO	devno
+	move.w	\1,-(SP)
+	move.w	#44,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+VSETMODE	MACRO	mode
+	move.w	\1,-(SP)
+	move.w	#88,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+VGETMONITOR	MACRO
+
+	move.w	#89,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+	
+VSETSYNC	MACRO	external
+	move.w	\2,-(SP)
+	move.w	#90,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+	
+VGETSIZE	MACRO	mode
+	move.w	\1,-(SP)
+	move.w	#91,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+	
+VSETRGB	MACRO	index,count,array
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#93,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+	
+VGETRGB	MACRO	index,count,array
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#94,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_DOBLOCK	MACRO	data_in,size_in,data_out,size_out
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#96,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_BLKHANDSHAKE	MACRO	data_in,size_in,data_out,size_out
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#97,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_BLKUNPACKED	MACRO	data_in,size_in,data_out,size_out
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#98,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+	
+DSP_INSTREAM	MACRO	data_in,block_size,num_blocks,blocks_done
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#99,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_OUTSTREAM	MACRO	data_out,block_size,num_blocks,blocks_done
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#100,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_IOSTREAM	MACRO	data_in,data_out,block_insize,block_outsize,num_blocks,blocksdone
+	move.l	\6,-(SP)
+	move.l	\5,-(SP)
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#101,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	26(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_REMOVEINTERRUPTS	MACRO	mask
+	move.w	\1,-(SP)
+	move.w	#102,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_GETWORDSIZE	MACRO
+
+	move.w	#103,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_LOCK	MACRO
+
+	move.w	#104,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_UNLOCK	MACRO
+
+	move.w	#105,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_AVAILABLE	MACRO	xavailable,yavailable
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#106,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+	
+DSP_RESERVE	MACRO	xreserve,yreserve
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#107,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+	
+DSP_LOADPROG	MACRO	file,ability,buffer
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#108,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+	
+DSP_EXECPROG	MACRO	codeptr,codesize,ability
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#109,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_EXECBOOT	MACRO	codeptr,codesize,ability
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#110,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_LODTOBINARY	MACRO	file,codeptr
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#111,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_TRIGGERHC	MACRO	vector
+	move.w	\1,-(SP)
+	move.w	#112,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_REQUESTUNIQUEABILITY	MACRO
+
+	move.w	#113,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_GETPROGABILITY	MACRO
+
+	move.w	#114,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_FLUSHSUBROUTINES	MACRO
+
+	move.w	#115,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_LOADSUBROUTINE	MACRO	ptr,size,ability
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#116,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_INQSUBRABILITY	MACRO	ability
+	move.w	\1,-(SP)
+	move.w	#117,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_RUNSUBROUTINE	MACRO	handle
+	move.w	\1,-(SP)
+	move.w	#118,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_HF0	MACRO	flag
+	move.w	\1,-(SP)
+	move.w	#119,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_HF1	MACRO	flag
+	move.w	\1,-(SP)
+	move.w	#120,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSP_HF2	MACRO
+
+	move.w	#121,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_HF3	MACRO
+
+	move.w	#122,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_BLKWORDS	MACRO	data_in,size_in,data_out,size_out
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#123,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_BLKBYTES	MACRO	data_in,size_in,data_out,size_out
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#124,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_HSTAT	MACRO
+
+	move.w	#125,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DSP_SETVECTORS	MACRO	receiver,transmitter
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#126,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+DSP_MULTBLOCKS	MACRO	numsend,numreceive,sendblocks,receiveblocks	
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#127,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	18(SP),SP
+
+	ENDM
+
+; +++
+
+LOCKSND	MACRO
+
+	move.w	#128,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+UNLOCKSND	MACRO
+
+	move.w	#129,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#2,SP
+
+	ENDM
+	
+SOUNDCMD	MACRO	mode,data
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#130,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+	
+SETBUFFER	MACRO	reg,begaddr,endaddr
+	move.l	\3,-(SP)	
+	move.l	\2,-(SP)	
+	move.w	\1,-(SP)	
+	move.w	#131,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+	
+SETMODE	MACRO	mode
+	move.w	\1,-(SP)
+	move.w	#132,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+SETTRACKS	MACRO	playtracks,rectracks
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#133,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+SETMONTRACKS	MACRO	montrack
+	move.w	\1,-(SP)
+	move.w	#134,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+SETINTERRUPT	MACRO	src_inter,cause
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#135,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+BUFFOPER	MACRO	mode
+	move.w	\1,-(SP)
+	move.w	#136,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+DSPTRISTATE	MACRO	dSPxmit,dSPrec
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#137,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+GPIO	MACRO	mode,data
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#138,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+	
+DEVCONNECT	MACRO	src,dst,srcclk,prescale,protocol
+	move.w	\5,-(SP)
+	move.w	\4,-(SP)
+	move.w	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#139,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+SNDSTATUS	MACRO	reset
+	move.w	\1,-(SP)
+	move.w	#140,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+BUFFPTR	MACRO	pointer
+	move.l	\1,-(SP)
+	move.w	#141,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+VSETMASK	MACRO	andmask,ormask
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#150,-(SP)	; -  -
+	trap	#14	; *** XBIOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+DSPWAITINPUT	MACRO	adresse_dSP
+.waitinput\@	btst	#1,\1
+	beq.s	.waitinput\@
+
+	ENDM
+
+; +++
+
+DSPWAITOUTPUT	MACRO	adresse_dSP
+.waitoutput\@	btst	#0,\1
+	beq.s	.waitoutput\@
+
+	ENDM
+
+; +++
+
+BLTWAIT	MACRO	adresse_blitter
+.waitblitter\@	tas	\1
+	bmi.s	.waitblitter\@
+
+	ENDM
+
+; +++
+
+; --------------------- VDI ---------------------------------------------------
+
+VQ_GDOS	MACRO
+
+	move.w	#-2,D0
+	trap	#2
+
+	ENDM
+
+; +++
+
+V_SET_APP_BUFF	MACRO	buf,nparagraphs
+	move.l	\1,_intin+2*0
+	move.w	\2,_intin+2*2
+	VDI	#-1,#0,#2,#6
+
+	ENDM
+
+; +++
+
+V_OPNWK	MACRO	work_in,handle,work_out
+	move.l	\1,A0
+	lea	_intin,A1
+	moveq	#0,D0
+_bcl_v_opnwk1\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_v_opnwk1\@
+	move.w	\2,_contrl+2*6
+	VDI	#1,#0,#11
+	move.l	\3,A0
+	lea	_intout,A1
+	moveq	#44,D0
+_bcl_v_opnwk2\@	move.w	(A1)+,(A0)+
+	dbra	D0,_bcl_v_opnwk2\@
+	lea	_ptsout,A1
+	moveq	#12,D0
+_bcl_v_opnwk3\@	move.w	(A1)+,(A0)+
+	dbra	D0,_bcl_v_opnwk3\@
+
+	ENDM
+
+; +++
+
+V_CLSWK	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#2,#0,#0
+
+	ENDM
+
+; +++
+
+V_CLRWK	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#3,#0,#0
+
+	ENDM
+
+; +++
+
+V_UPDWK	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#4,#0,#0
+
+	ENDM
+
+; +++
+
+VQ_CHCELLS	MACRO	handle,rows,columns
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#1
+	move.w	_intout+2*0,\2
+	move.w	_intout+2*1,\3
+
+	ENDM
+
+; +++
+
+V_EXIT_CUR	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#2
+
+	ENDM
+
+; +++
+
+V_ENTER_CUR	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#3
+
+	ENDM
+
+; +++
+
+V_CURUP	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#4
+
+	ENDM
+
+; +++
+
+V_CURDOWN	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#5
+
+	ENDM
+
+; +++
+
+V_CURRIGHT	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#6
+
+	ENDM
+
+; +++
+
+V_CURLEFT	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#7
+
+	ENDM
+
+; +++
+
+V_CURHOME	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#8
+
+	ENDM
+
+; +++
+
+V_EEOS	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#9
+
+	ENDM
+
+; +++
+
+V_EEOL	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#10
+
+	ENDM
+
+; +++
+
+VS_CURADRESS	MACRO	handle,row,column
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#5,#0,#2,#11
+
+	ENDM
+
+; +++
+
+V_CURTEXT	MACRO	handle,str
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin,A1
+	jsr	_vdi_copystring
+	VDI	#5,#0,D1,#12
+
+	ENDM
+
+; +++
+
+V_RVON	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#13
+
+	ENDM
+
+; +++
+
+V_RVOFF	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#14
+
+	ENDM
+
+; +++
+
+VQ_CURADRESS	MACRO	handle,row,column
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#15
+	move.w	_intout+2*0,\2
+	move.w	_intout+2*1,\3
+
+	ENDM
+
+; +++
+
+VQ_TABSTATUS	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#16
+
+	ENDM
+
+; +++
+
+V_HARDCOPY	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#17
+
+	ENDM
+
+; +++
+
+V_DSPCUR	MACRO	handle,x,y
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	VDI	#5,#0,#0,#18
+
+	ENDM
+
+; +++
+
+V_RMCUR	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#19
+
+	ENDM
+
+; +++
+
+V_FORM_ADV	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#20
+
+	ENDM
+
+; +++
+
+V_OUTPUT_WINDOW	MACRO	handle,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#5,#2,#0,#21
+
+	ENDM
+
+; +++
+
+V_CLEAR_DISP_LIST	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#22
+
+	ENDM
+
+; +++
+
+V_BIT_IMAGE	MACRO	handle,fname,ratio,xscale,yscale,halign,valigne,pxy
+	move.w	\1,_contrl+2*6
+	move.w	\3,_intin+2*0
+	move.w	\4,_intin+2*1
+	move.w	\5,_intin+2*2
+	move.w	\6,_intin+2*3
+	move.w	\7,_intin+2*4
+	move.l	\2,A0
+	lea	_intin+2*5,A1
+	jsr	_vdi_copystring
+	move.l	\8,A0
+	lea	_ptsin+2*0,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#5,#2,D1,#23
+
+	ENDM
+
+; +++
+
+VQ_SCAN	MACRO	handle,grh,passes,alh,apage,div
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#24
+	move.w	_intout+2*0,grh
+	move.w	_intout+2*1,passes
+	move.w	_intout+2*2,alh
+	move.w	_intout+2*3,apage
+	move.w	_intout+2*4,div
+
+	ENDM
+
+; +++
+
+V_ALPHA_TEXT	MACRO	handle,str
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin+2*0,A1
+	jsr	_vdi_copystring
+	VDI	#5,#0,D1,#25
+
+	ENDM
+
+; +++
+
+VS_PALETTE	MACRO	handle,mode
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#5,#0,#1,#60
+
+	ENDM
+
+; +++
+
+VT_RESOLUTION	MACRO	handle,xres,yres,xout,yout
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#5,#0,#2,#81
+	move.w	_intout+2*0,\4
+	move.w	_intout+2*1,\5
+
+	ENDM
+
+; +++
+
+VT_AXIS	MACRO	handle,xres,yres,xout,yout
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#5,#0,#2,#82
+	move.w	_intout+2*0,\4
+	move.w	_intout+2*1,\5
+
+	ENDM
+
+; +++
+
+VT_ORIGIN	MACRO	handle,xorigin,yorigin
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#5,#0,#2,#83
+
+	ENDM
+
+; +++
+
+VQ_TDIMENSIONS	MACRO	handle,xdim,ydim
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#84
+	move.w	_intout+2*0,\2
+	move.w	_intout+2*1,\3
+
+	ENDM
+
+; +++
+
+VT_ALIGNMENT	MACRO	handle,dx,dy
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#5,#0,#2,#85
+
+	ENDM
+
+; +++
+
+VQP_FILMS	MACRO	handle,films
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#91
+	moveq	#125,D0
+	move.l	\2,A0
+	lea	_intout,A1
+_bcl_vqpfilms\@	move.b	(A0)+,(A1)+
+	dbra	D0,_bcl_vqpfilms\@
+
+	ENDM
+
+; +++
+
+VQP_STATE	MACRO	handle,port,film,lightness,interlace,planes,indexes
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#92
+	move.w	_intout+2*0,\2
+	move.w	_intout+2*1,\3
+	move.w	_intout+2*2,\4
+	move.w	_intout+2*3,\5
+	move.w	_intout+2*4,\6
+	lea	_intout+2*5,A0
+	move.l	\7,A1
+	moveq	#7,D0
+_bcl_vqpstate\@	move.l	(A0)+,(A1)+
+	dbra	D0,_bcl_vqpstate\@
+
+	ENDM
+
+; +++
+
+VSP_STATE	MACRO	handle,port,film,lightness,interlace,planes,indexes
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	move.w	\4,_intin+2*2
+	move.w	\5,_intin+2*3
+	move.w	\6,_intin+2*4
+	lea	_intin+2*5,A1
+	move.l	\7,A0
+	moveq	#7,D0
+_bcl_vststate\@	move.l	(A0)+,(A1)+
+	dbra	D0,_bcl_vststate\@
+	VDI	#5,#0,#20,#93
+
+	ENDM
+
+; +++
+
+VSP_SAVE	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#94
+
+	ENDM
+
+; +++
+
+VSP_MESSAGE	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#95
+
+	ENDM
+
+; +++
+
+VQP_ERROR	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#5,#0,#0,#96
+
+	ENDM
+
+; +++
+
+V_META_EXTENTS	MACRO	handle,xmin,ymin,xmax,ymax
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	move.w	\4,_ptsin+2*2
+	move.w	\5,_ptsin+2*3
+	VDI	#5,#2,#0,#98
+
+	ENDM
+
+; +++
+
+V_WRITE_META	MACRO	handle,intin_len,intin,ptsin_len,ptsin
+	move.w	\1,_contrl+2*6
+	move.l	\3,A0
+	lea	_intin,A0
+	move.w	\2,D0
+	subq	#1,D0
+_bcl_wrmetA1\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_wrmetA1\@
+	move.l	\5,A0
+	lea	_ptsin,A0
+	move.w	\4,D0
+	subq	#1,D0
+_bcl_wrmetA2\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_wrmetA2\@
+	VDI	#5,\2,\4,#99
+
+	ENDM
+
+; +++
+
+VM_PAGESIZE	MACRO	handle,pwidth,pheight
+	move.w	\1,_contrl+2*6
+	clr	_intin+2*0
+	move.w	\2,_intin+2*1
+	move.w	\3,_intin+2*2
+	VDI	#5,#0,#2,#99
+
+	ENDM
+
+; +++
+
+VM_COORDS	MACRO	handle,xmin,ymin,xmax,ymax
+	move.w	\1,_contrl+2*6
+	move.w	#1,_intin+2*0
+	move.w	\2,_intin+2*1
+	move.w	\3,_intin+2*2
+	move.w	\4,_intin+2*3
+	move.w	\5,_intin+2*4
+	VDI	#5,#0,#5,#99
+
+	ENDM
+
+; +++
+
+V_BEZ_QUAL	MACRO	handle,percent,actual
+	move.w	\1,_contrl+2*6
+	move.w	#32,_intin+2*0
+	move.w	#1,_intin+2*1
+	move.w	\2,_intin+2*2
+	VDI	#5,#0,#3,#99
+	move.w	_intin+2*0,\3
+
+	ENDM
+
+; +++
+
+VM_FILENAME	MACRO	handle,fname
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin+2*0,A1
+	jsr	_vdi_copystring
+	VDI	#5,#0,D1,#100
+
+	ENDM
+
+; +++
+
+V_FONTINIT	MACRO	fptr
+	move.l	\1,_intin
+	VDI	#5,#0,#2,#102
+
+	ENDM
+
+; +++
+
+V_PGCOUNT	MACRO	handle,numcopies
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#5,#0,#1,#2000
+
+	ENDM
+
+; +++
+
+V_PLINE	MACRO	handle,count,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\3,A0
+	lea	_ptsin,A1
+	move.w	\2,D0
+	subq	#1,D0
+_bcl_vpline\@	move.l	(A0)+,(A1)+
+	dbra	D0,_bcl_vpline\@
+	VDI	#6,\2,#0
+
+	ENDM
+
+; +++
+
+V_BEZ	MACRO	handle,count,pxy,bezarr,extent,totpts,totmoves
+	movem.l	A2-A3,-(SP)
+	move.w	\1,_contrl+2*6
+	move.l	\3,A0
+	move.l	\4,A2
+	lea	_intin,A3
+	lea	_ptsin,A1
+	moveq	#0,D1
+	move.w	\2,D0
+	subq	#1,D0
+_bcl_vbez1\@	move.b	(A2)+,D1
+	move.w	D1,(A3)+
+	move.l	(A0)+,(A1)+
+	dbra	D0,_bcl_vbez1\@
+	move.w	\2,D0
+	addq	#1,D0
+	asr	#1,D0
+	VDI	#6,\2,D0,#13
+	move.w	_intout+2*0,\6
+	move.w	_intout+2*1,\7
+	lea	_ptsout,A0
+	move.l	\5,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	movem.l	(SP)+,A2-A3
+
+	ENDM
+
+; +++
+
+V_PMARKER	MACRO	handle,count,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\3,A0
+	lea	_ptsin,A1
+	move.w	\2,D0
+	subq	#1,D0
+.bcl_vpmarker	move.l	(A0)+,(A1)+
+	dbra	D0,.bcl_vpmarker
+	VDI	#7,\2,#0
+
+	ENDM
+
+; +++
+
+V_GTEXT	MACRO	handle,x,y,str
+	move.w	\1,_contrl+2*6
+	move.l	\4,A0
+	lea	_intin,A1
+	jsr	_vdi_copystring
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	VDI	#8,#1,D1
+
+	ENDM
+
+; +++
+
+V_FILLAREA	MACRO	handle,count,pxy
+	move.w	\1,_contrl+2*6
+	move.w	\2,D0
+	move.l	\3,A0
+	lea	_ptsin,A1
+	subq	#1,D0
+.bcl_vfillarea	move.l	(A0)+,(A1)+
+	dbra	D0,.bcl_vfillarea
+	VDI	#9,\2,#0
+
+	ENDM
+
+; +++
+
+V_BEZ_FILL	MACRO
+
+
+	ENDM
+
+; +++
+
+V_CELLARRAY	MACRO
+
+
+	ENDM
+
+; +++
+
+V_BAR	MACRO	handle,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#11,#2,#0,#1
+
+	ENDM
+
+; +++
+
+V_ARC	MACRO	handle,x,y,radius,startangle,endangle
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	clr.l	_ptsin+2*2
+	clr.l	_ptsin+2*4
+	move.w	\4,_ptsin+2*6
+	clr	_ptsin+2*7
+	move.w	\5,_intin+2*0
+	move.w	\6,_intin+2*1
+	VDI	#11,#4,#2,#2
+
+	ENDM
+
+; +++
+
+V_PIESLICE	MACRO	handle,x,y,radius,startangle,endangle
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	clr.l	_ptsin+2*2
+	clr.l	_ptsin+2*4
+	move.w	\4,_ptsin+2*6
+	clr	_ptsin+2*7
+	move.w	\5,_intin+2*0
+	move.w	\6,_intin+2*1
+	VDI	#11,#4,#2,#3
+
+	ENDM
+
+; +++
+
+V_CIRCLE	MACRO	handle,x,y,radius
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	clr.l	_ptsin+2*2
+	move.w	\4,_ptsin+2*4
+	clr	_ptsin+2*5
+	VDI	#11,#3,#0,#4
+
+	ENDM
+
+; +++
+
+V_ELLIPSE	MACRO	handle,x,y,xradius,yradius
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	move.w	\4,_ptsin+2*2
+	move.w	\5,_ptsin+2*3
+	VDI	#11,#2,#0,#5
+
+	ENDM
+
+; +++
+
+V_ELLARC	MACRO	handle,x,y,xradius,yradius,startangle,endangle
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	move.w	\4,_ptsin+2*2
+	move.w	\5,_ptsin+2*3
+	move.w	\6,_intin+2*0
+	move.w	\7,_intin+2*1
+	VDI	#11,#2,#2,#6
+
+	ENDM
+
+; +++
+
+V_ELLPIE	MACRO	handle,x,y,xradius,yradius,startangle,endangle
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	move.w	\4,_ptsin+2*2
+	move.w	\5,_ptsin+2*3
+	move.w	\6,_intin+2*0
+	move.w	\7,_intin+2*1
+	VDI	#11,#2,#2,#7
+
+	ENDM
+
+; +++
+
+V_RBOX	MACRO	handle,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#11,#2,#0,#8
+
+	ENDM
+
+; +++
+
+V_RFBOX	MACRO	handle,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#11,#2,#0,#9
+
+	ENDM
+
+; +++
+
+V_JUSTIFIED	MACRO	handle,x,y,str,length,wflag,cflag
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	move.w	\5,_ptsin+2*2
+	clr	_ptsin+2*3
+	move.w	\6,_intin+2*0
+	move.w	\7,_intin+2*1
+	move.l	\4,A0
+	lea	_intin+2*2,A1
+	jsr	_vdi_copystring
+	VDI	#11,#2,D1,#10
+
+	ENDM
+
+; +++
+
+V_BEZ_OFF	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#11,#0,#0,#13
+
+	ENDM
+
+; +++
+
+V_BEZ_ON	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#11,#1,#0,#13
+
+	ENDM
+
+; +++
+
+VST_HEIGHT	MACRO	handle,height,wchar,hchar,wcell,hcell
+	move.w	\1,_contrl+2*6
+	clr	_ptsin+2*0
+	move.w	\2,_ptsin+2*1
+	VDI	#12,#1,#0
+	move.w	_ptsout+2*0,\3
+	move.w	_ptsout+2*1,\4
+	move.w	_ptsout+2*2,\5
+	move.w	_ptsout+2*3,\6
+
+	ENDM
+
+; +++
+
+VST_ROTATION	MACRO	handle,angle
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#13,#0,#1
+
+	ENDM
+
+; +++
+
+VS_COLOR	MACRO	handle,color,rgb
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.l	\3,A0
+	lea	_intin+2*1,A1
+	move.l	(A0)+,(A1)+
+	move.w	(A0)+,(A1)+
+	VDI	#14,#0,#4
+
+	ENDM
+
+; +++
+
+VSL_TYPE	MACRO	handle,type
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#15,#0,#1
+
+	ENDM
+
+; +++
+
+VSL_WIDTH	MACRO	handle,width
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#16,#0,#1
+
+	ENDM
+
+; +++
+
+VSL_COLOR	MACRO	handle,color
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#17,#0,#1
+
+	ENDM
+
+; +++
+
+VSM_TYPE	MACRO	handle,type
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#18,#0,\2
+
+	ENDM
+
+; +++
+
+VSM_HEIGHT	MACRO	handle,size
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#19,#0,#1
+
+	ENDM
+
+; +++
+
+VSM_COLOR	MACRO	handle,color
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#20,#0,#1
+
+	ENDM
+
+; +++
+
+VST_FONT	MACRO	handle,index
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#21,#0,#1
+
+	ENDM
+
+; +++
+
+VST_COLOR	MACRO	handle,color
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#22,#0,#1
+
+	ENDM
+
+; +++
+
+VSF_INTERIOR	MACRO	handle,interior
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#23,#0,\2
+
+	ENDM
+
+; +++
+
+VSF_STYLE	MACRO	handle,style
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#24,#0,#1
+
+	ENDM
+
+; +++
+
+VSF_COLOR	MACRO	handle,color
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#25,#0,#1
+
+	ENDM
+
+; +++
+
+VQ_COLOR	MACRO	handle,index,flag,rgb
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#26,#0,#2
+	lea	_intout,A0
+	move.l	\4,A1
+	move.l	(A0)+,(A1)+
+	move.w	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VQ_CELLARRAY	MACRO
+
+
+	ENDM
+
+; +++
+
+VRQ_LOCATOR	MACRO
+
+
+	ENDM
+
+; +++
+
+VSM_LOCATOR	MACRO
+
+
+	ENDM
+
+; +++
+
+VRQ_VALUATOR	MACRO
+
+
+	ENDM
+
+; +++
+
+VSM_VALUATOR	MACRO
+
+
+	ENDM
+
+; +++
+
+VRQ_CHOICE	MACRO
+
+
+	ENDM
+
+; +++
+
+VSM_CHOICE	MACRO
+
+
+	ENDM
+
+; +++
+
+VRQ_STRING	MACRO
+
+
+	ENDM
+
+; +++
+
+VSM_STRING	MACRO
+
+
+	ENDM
+
+; +++
+
+VSWR_MODE	MACRO	handle,mode
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#32,#0,#1
+
+	ENDM
+
+; +++
+
+VSIN_MODE	MACRO	handle,device,mode
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#33,#0,#2
+
+	ENDM
+
+; +++
+
+VQL_ATTRIBUTES	MACRO	handle,attr
+	move.w	\1,_contrl+2*6
+	VDI	#35,#0,#0
+	lea	_intout,A0
+	move.l	\2,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VQM_ATTRIBUTES	MACRO	handle,attr
+	move.w	\1,_contrl+2*6
+	VDI	#36,#0,#0
+	lea	_intout,A0
+	move.l	\2,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.w	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VQF_ATTRIBUTES	MACRO	handle,attr
+	move.w	\1,_contrl+2*6
+	VDI	#37,#0,#0
+	lea	_intout,A0
+	move.l	\2,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.w	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VQT_ATTRIBUTES	MACRO	handle,attr
+	move.w	\1,_contrl+2*6
+	VDI	#38,#0,#0
+	lea	_intout,A0
+	move.l	\2,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VST_ALIGNMENT	MACRO	handle,halign,valign,hout,vout
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#39,#0,#2
+	move.w	_intout+2*0,\4
+	move.w	_intout+2*1,\5
+
+	ENDM
+
+; +++
+
+V_OPNVWK	MACRO	work_in,handle,work_out
+	move.w	\2,_contrl+2*6
+	move.l	\1,A0
+	lea	_intin,A1
+	moveq	#10,D0
+_bcl_vopnvwk1\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vopnvwk1\@
+	VDI	#100,#0,#11
+	move.w	_contrl+2*6,\2
+	lea	_intout,A0
+	move.l	\3,A1
+	moveq	#44,D0
+_bcl_vopnvwk2\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vopnvwk2\@
+	lea	_ptsout,A0
+	moveq	#12,D0
+_bcl_vopnvwk3\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vopnvwk3\@
+
+	ENDM
+
+; +++
+
+V_CLSVWK	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#101,#0,#0
+
+	ENDM
+
+; +++
+
+VQ_EXTND	MACRO	handle,mode,work_out
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#102,#0,#1
+	move.l	\3,A1
+	lea	_intout,A0
+	move.l	\3,A1
+	moveq	#44,D0
+_bcl_vqextnD1\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vqextnD1\@
+	lea	_ptsout,A0
+	moveq	#12,D0
+_bcl_vqextnD2\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vqextnD2\@
+
+	ENDM
+
+; +++
+
+V_CONTOURFILL	MACRO	handle,x,y,color
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_ptsin+2*0
+	move.w	\4,_ptsin+2*1
+	VDI	#103,#0,#0
+
+	ENDM
+
+; +++
+
+VSF_PERIMETER	MACRO	handle,flag
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#104,#0,#1
+
+	ENDM
+
+; +++
+
+V_GET_PIXEL	MACRO	handle,x,y,pindex,vindex
+	move.w	\1,_contrl+2*6
+	move.w	\2,_ptsin+2*0
+	move.w	\3,_ptsin+2*1
+	VDI	#105,#1,#0
+	move.w	_intout+2*0,\4
+	move.w	_intout+2*1,\5
+
+	ENDM
+
+; +++
+
+VST_EFFECTS	MACRO	handle,effects
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#106,#0,#1
+
+	ENDM
+
+; +++
+
+VST_POINTS	MACRO	handle,point,wchar,hchar,wcell,hcell
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#107,#0,#1
+	move.w	_ptsout+2*0,\3
+	move.w	_ptsout+2*1,\4
+	move.w	_ptsout+2*2,\5
+	move.w	_ptsout+2*3,\6
+
+	ENDM
+
+; +++
+
+VSL_ENDS	MACRO	handle,start,end
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.w	\3,_intin+2*1
+	VDI	#108,#0,#2
+
+	ENDM
+
+; +++
+
+VRO_CPYFM	MACRO	handle,mode,pxy,src,dest
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.l	\4,_contrl+2*7
+	move.l	\5,_contrl+2*9
+	VDI	#109,#4,#1
+	lea	_intout,A0
+	move.l	\3,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VR_TRNFM	MACRO	handle,scr,dest
+	move.w	\1,_contrl+2*6
+	move.l	\2,_contrl+2*7
+	move.l	\3,_contrl+2*9
+	VDI	#110,#0,#0
+
+	ENDM
+
+; +++
+
+VSC_FORM	MACRO	handle,newform
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin,A1
+	moveq	#36,D0
+_bcl_vscform\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vscform\@
+	VDI	#111,#0,#37
+
+	ENDM
+
+; +++
+
+VSF_UDPAT	MACRO	handle,pattern,planes
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin,A1
+	move.w	\3,D1
+	lsl	#4,D1
+	move.w	D1,D0
+	subq	#1,D0
+_bcl_vsfudpat\@	move.w	(A0)+,(A1)+
+	dbra	D0,_bcl_vsfudpat\@
+	VDI	#112,#0,D1
+
+	ENDM
+
+; +++
+
+VSL_UDSTY	MACRO	handle,pattern
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#113,#0,#1
+
+	ENDM
+
+; +++
+
+VR_RECFL	MACRO	handle,pxy
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#113,#2,#0
+
+	ENDM
+
+; +++
+
+VQIN_MODE	MACRO	handle,dev,mode
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#115,#0,#1
+	move.w	_intout+2*0,\3
+
+	ENDM
+
+; +++
+
+VQT_EXTENT	MACRO	handle,str,pts
+	move.w	\1,_contrl+2*6
+	move.l	\2,A0
+	lea	_intin+2*0,A1
+	jsr	_vdi_copystring
+	VDI	#116,#0,D1
+	lea	_ptsout+2*0,A0
+	move.l	\3,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+VQT_WIDTH	MACRO	handle,wch,cellw,left,right
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#117,#0,#1
+	move.w	_ptsout+2*0,\3
+	move.w	_ptsout+2*2,\4
+	move.w	_ptsout+2*4,\5
+
+	ENDM
+
+; +++
+
+VEX_TIMV	MACRO	handle,timv,old_timv,mpt
+	move.w	\1,_contrl+2*6
+	move.l	\2,_contrl+2*7
+	VDI	#118,#0,#0
+	move.l	_contrl+2*9,\3
+	move.w	_intout+2*0,\4
+
+	ENDM
+
+; +++
+
+VST_LOAD_FONTS	MACRO	handle,rsrvd
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#119,#0,#1
+
+	ENDM
+
+; +++
+
+VRT_CPYFM	MACRO	handle,mode,pxr,src,dest,colors
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.l	\6,_intin+2*1
+	move.l	\4,_contrl+2*7
+	move.l	\5,_contrl+2*9
+	VDI	#121,#4,#3
+	move.l	\3,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+
+	ENDM
+
+; +++
+
+V_SHOW_C	MACRO	handle,reset
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#122,#0,#1
+
+	ENDM
+
+; +++
+
+V_HIDE_C	MACRO	handle
+	move.w	\1,_contrl+2*6
+	VDI	#123,#0,#0
+
+	ENDM
+
+; +++
+
+VQ_MOUSE	MACRO	handle,mb,mx,my
+	move.w	\1,_contrl+2*6
+	VDI	#124,#0,#0
+	move.w	_intout+2*0,\1
+	move.w	_ptsout+2*0,\2
+	move.w	_ptsout+2*1,\3
+
+	ENDM
+
+; +++
+
+VEX_BUTV	MACRO	handle,butv,old_butv
+	move.w	\1,_contrl+2*6
+	move.l	\2,_contrl+2*7
+	VDI	#125,#0,#0
+	move.l	_contrl+2*9,\3
+
+	ENDM
+
+; +++
+
+VEX_MOTV	MACRO	handle,motv,old_motv
+	move.w	\1,_contrl+2*6
+	move.l	\2,_contrl+2*7
+	VDI	#126,#0,#0
+	move.l	_contrl+2*9,\3
+
+	ENDM
+
+; +++
+
+VEX_CURV	MACRO	handle,curv,old_curv
+	move.w	\1,_contrl+2*6
+	move.l	\2,_contrl+2*7
+	VDI	#127,#0,#0
+	move.l	_contrl+2*9,\3
+
+	ENDM
+
+; +++
+
+VQ_KEY_S	MACRO	handle,status
+	move.w	\1,_contrl+2*6
+	VDI	#128,#0,#0
+	move.w	_intout+2*0,\2
+
+	ENDM
+
+; +++
+
+VS_CLIP	MACRO	handle,flag,pxy
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	move.l	\3,A0
+	lea	_ptsin,A1
+	move.l	(A0)+,(A1)+
+	move.l	(A0)+,(A1)+
+	VDI	#129,#2,#1
+
+	ENDM
+
+; +++
+
+VQT_NAME	MACRO	handle,index,fontname
+	move.w	\1,_contrl+2*6
+	move.w	\2,_intin+2*0
+	VDI	#130,#0,#1
+	lea	_intout+2*1,A0
+	move.l	\3,A1
+	moveq	#32,D0
+_bcl_vqtname\@	move.w	(A0)+,D1
+	move.b	D1,(A1)+
+	dbra	D0,_bcl_vqtname\@
+
+	ENDM
+
+; +++
+
+VQT_FONTINFO	MACRO	handle,first,last,dist,width,effects
+	move.w	\1,_contrl+2*6
+	VDI	#131,#0,#0
+	move.w	_intout+2*0,\2
+	move.w	_intout+2*1,\3
+	move.w	_ptsout+2*0,\5
+	move.l	\4,A0
+	move.w	_ptsout+2*1,(A0)+
+	move.w	_ptsout+2*3,(A0)+
+	move.w	_ptsout+2*5,(A0)+
+	move.w	_ptsout+2*7,(A0)+
+	move.l	\6,A0
+	move.w	_ptsout+2*2,(A0)+
+	move.w	_ptsout+2*4,(A0)+
+	move.w	_ptsout+2*6,(A0)+
+
+	ENDM
+
+; +++
+
+VQT_FONTHEADER	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_TRACKKERN	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_PAIRKERN	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_CHARMAP	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_KERN	MACRO
+
+
+	ENDM
+
+; +++
+
+V_GETBITMAP_INFO	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_F_EXTENT	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_F_EXTENT16	MACRO
+
+
+	ENDM
+
+; +++
+
+V_FTEXT	MACRO
+
+
+	ENDM
+
+; +++
+
+V_FTEXT16	MACRO
+
+
+	ENDM
+
+; +++
+
+V_FTEXT_OFFSET	MACRO
+
+
+	ENDM
+
+; +++
+
+V_FTEXT_OFFSET16	MACRO
+
+
+	ENDM
+
+; +++
+
+V_KILLOUTLINE	MACRO
+
+
+	ENDM
+
+; +++
+
+V_GETOUTLINE	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_SCRATCH	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_ERROR	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_ARBPT	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_ARBPT32	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_ADVANCE	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_ADVANCE32	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_DEVINFO	MACRO
+
+
+	ENDM
+
+; +++
+
+V_SAVECACHE	MACRO
+
+
+	ENDM
+
+; +++
+
+V_LOADCACHE	MACRO
+
+
+	ENDM
+
+; +++
+
+V_FLUSHCACHE	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_SETSIZE	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_SETSIZE32	MACRO
+
+
+	ENDM
+
+; +++
+
+VST_SKEW	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_GET_TABLE	MACRO
+
+
+	ENDM
+
+; +++
+
+VQT_CACHE_SIZE	MACRO
+
+
+	ENDM
+
+; +++
+
+VDI	MACRO
+
+	move.w	\1,_contrl+2*0
+	move.w	\2,_contrl+2*1
+	move.w	\3,_contrl+2*3
+	IFEQ	NARG-4
+	move.w	\4,_contrl+2*5
+	ENDC
+	jsr	_call_vdi
+
+	ENDM
+
+; +++
+
+_call_vdi	move.l	#_vdipb,D1
+	moveq.l	#115,D0
+	trap	#2
+	rts
+
+_vdi_copystring	moveq	#0,D0
+	moveq	#0,D1
+_bcl_vcpystr	addq	#1,D1
+	move.b	(A0)+,D0
+	move.w	D0,(A1)+
+	bne.s	_bcl_vcpystr
+	rts
+
+_vdipb	dc.l	_contrl,_intin,_ptsin,_intout,_ptsout
+
+_contrl	ds.w	12
+_intin	ds.w	256
+_ptsin	ds.w	256
+_intout	ds.w	128
+_ptsout	ds.w	256
+
+; --------------------- AES ---------------------------------------------------
+
+AES	MACRO	opcode
+	move.w	#\1,D0
+	jsr	_call_aes
+
+	ENDM
+
+; +++
+
+APPL_INIT	MACRO
+
+	AES	10
+	move.w	_int_out,_ap_id
+
+	ENDM
+
+; +++
+
+APPL_READ	MACRO	ap_id,length,message
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.l	\3,_addr_in
+	AES	11
+
+	ENDM
+
+; +++
+
+APPL_WRITE	MACRO	ap_id,length,message
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.l	\3,_addr_in
+	AES	12
+
+	ENDM
+
+; +++
+
+APPL_FIND	MACRO	fname
+	move.l	\1,_addr_in
+	AES	13
+
+	ENDM
+
+; +++
+
+APPL_TPLAY	MACRO	mem,num,scale
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	14
+
+	ENDM
+
+; +++
+
+APPL_TRECORD	MACRO	mem,num
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	15
+
+	ENDM
+
+; +++
+
+APPL_SEARCH	MACRO	mode,fname
+	move.w	\1,intin
+	move.l	\2,_addr_in
+	AES	18
+
+	ENDM
+
+; +++
+
+APPL_EXIT	MACRO
+
+	AES	19
+
+	ENDM
+
+; +++
+
+APPL_GETINFO	MACRO	ap_gtype
+	move.w	\1,_int_in
+	AES	130
+
+	ENDM
+
+; +++
+
+EVNT_KEYBD	MACRO
+
+	AES	20
+
+	ENDM
+
+; +++
+
+EVNT_BUTTON	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	AES	21
+	move.w	_int_out+2,\4
+	move.w	_int_out+4,\5
+	move.w	_int_out+6,\6
+	move.w	_int_out+8,\7
+
+	ENDM
+
+; +++
+
+EVNT_MOUSE	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	AES	22
+	move.w	_int_out+2,\6
+	move.w	_int_out+4,\7
+	move.w	_int_out+6,\8
+	move.w	_int_out+8,\9
+
+	ENDM
+
+; +++
+
+EVNT_MESAG	MACRO
+
+	move.l	\1,_addr_in
+	AES	23
+
+	ENDM
+
+; +++
+
+EVNT_TIMER	MACRO
+
+	move.w	\1,_int_in
+	AES	24
+
+	ENDM
+
+; +++
+
+EVNT_MULTI	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	move.w	\7,_int_in+12
+	move.w	\8,_int_in+14
+	move.w	\9,_int_in+16
+	move.w	\A,_int_in+18
+	move.w	\B,_int_in+20
+	move.w	\C,_int_in+22
+	move.w	\D,_int_in+24
+	move.w	\E,_int_in+26
+	move.w	\G,_int_in+28
+	move.w	\H,_int_in+30
+	move.l	\F,_addr_in
+	AES	25
+	move.w	_int_out+2,\I
+	move.w	_int_out+4,\J
+	move.w	_int_out+6,\K
+	move.w	_int_out+8,\L
+	move.w	_int_out+10,\M
+	move.w	_int_out+12,\N
+
+	ENDM
+
+; +++
+
+EVNT_DCLICK	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	AES	26
+
+	ENDM
+
+; +++
+
+MENU_BAR	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	30
+
+	ENDM
+
+; +++
+
+MENU_ICHECK	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	31
+
+	ENDM
+
+; +++
+
+MENU_IENABLE	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	32
+
+	ENDM
+
+; +++
+
+MENU_TNORMAL	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	33
+
+	ENDM
+
+; +++
+
+MENU_TEXT	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.l	\3,_addr_in+4
+	AES	34
+
+	ENDM
+
+; +++
+
+MENU_REGISTER	MACRO
+
+	move.w	\1,_int_in
+	move.l	\2,_addr_in
+	AES	35
+
+	ENDM
+
+; +++
+
+MENU_POPUP	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.l	\3,_addr_in
+	move.l	\4,_addr_in+4
+	AES	36
+
+	ENDM
+
+; +++
+
+OBJC_ADD	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	40
+
+	ENDM
+
+; +++
+
+OBJC_DELETE	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	41
+
+	ENDM
+
+; +++
+
+OBJC_DRAW	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\4,_int_in+4
+	move.w	\5,_int_in+6
+	move.w	\6,_int_in+8
+	move.w	\7,_int_in+10
+	AES	42
+
+	ENDM
+
+; +++
+
+OBJC_FIND	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\4,_int_in+4
+	move.w	\5,_int_in+6
+	AES	43
+
+	ENDM
+
+; +++
+
+OBJC_OFFSET	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	44
+	move.w	_int_out+2,\3
+	move.w	_int_out+4,\4
+
+	ENDM
+
+; +++
+
+OBJC_ORDER	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	AES	45
+
+	ENDM
+
+; +++
+
+OBJC_EDIT	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\5,_int_in+4
+	AES	46
+	move.w	_int_out+2,\4
+
+	ENDM
+
+; +++
+
+OBJC_CHANGE	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\4,_int_in+4
+	move.w	\5,_int_in+6
+	move.w	\6,_int_in+8
+	move.w	\7,_int_in+10
+	move.w	\8,_int_in+12
+	move.w	\9,_int_in+14
+	AES	47
+
+	ENDM
+
+; +++
+
+FORM_DO	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	50
+
+	ENDM
+
+; +++
+
+FORM_DIAL	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	move.w	\7,_int_in+12
+	move.w	\8,_int_in+14
+	move.w	\9,_int_in+16
+	AES	51
+
+	ENDM
+
+; +++
+
+FORM_ALERT	MACRO
+
+	move.w	\1,_int_in
+	move.l	\2,_addr_in
+	AES	52
+
+	ENDM
+
+; +++
+
+FORM_ERROR	MACRO
+
+	move.w	\1,_int_in
+	AES	53
+
+	ENDM
+
+; +++
+
+FORM_CENTER	MACRO
+
+	move.l	\1,_addr_in
+	AES	54
+	move.w	_int_out+2,\2
+	move.w	_int_out+4,\3
+	move.w	_int_out+6,\4
+	move.w	_int_out+8,\5
+
+	ENDM
+
+; +++
+
+GRAF_RUBBERBOX	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	AES	70
+	move.w	_int_out+2,\5
+	move.w	_int_out+4,\6
+
+	ENDM
+
+; +++
+
+GRAF_DRAGBOX	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	move.w	\7,_int_in+12
+	move.w	\8,_int_in+14
+	AES	71
+	move.w	_int_out+2,\9
+	move.w	_int_out+4,\A
+
+	ENDM
+
+; +++
+
+GRAF_MOVEBOX	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	AES	72
+
+	ENDM
+
+; +++
+
+GRAF_GROWBOX	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	move.w	\7,_int_in+12
+	move.w	\8,_int_in+14
+	AES	73
+
+	ENDM
+
+; +++
+
+GRAF_SHRINKBOX	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	move.w	\7,_int_in+12
+	move.w	\8,_int_in+14
+	AES	74
+
+	ENDM
+
+; +++
+
+GRAF_WATCHBOX	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\4,_int_in+4
+	AES	75
+
+	ENDM
+
+; +++
+
+GRAF_SLIDEBOX	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	move.w	\3,_int_in+2
+	move.w	\4,_int_in+4
+	AES	76
+
+	ENDM
+
+; +++
+
+GRAF_HANDLE	MACRO
+
+	AES	77
+	move.w	_int_out+2,\1
+	move.w	_int_out+4,\2
+	move.w	_int_out+6,\3
+	move.w	_int_out+8,\4
+
+	ENDM
+
+; +++
+
+GRAF_MOUSE	MACRO
+
+	move.w	\1,_int_in
+	IFEQ	NARG-2
+	move.l	\2,_addr_in
+	ENDC
+	AES	78
+
+	ENDM
+
+; +++
+
+GRAF_MKSTATE	MACRO
+
+	AES	79
+	move.w	_int_in,\1
+	move.w	_int_in+2,\2
+	move.w	_int_in+4,\3
+	move.w	_int_in+6,\4
+
+	ENDM
+
+; +++
+
+SCRP_READ	MACRO
+
+	move.l	\1,_addr_in
+	AES	80
+
+	ENDM
+
+; +++
+
+SCRP_WRITE	MACRO
+
+	move.l	\1,_addr_in
+	AES	81
+
+	ENDM
+
+; +++
+
+FSEL_INPUT	MACRO
+
+	move.l	\1,_addr_in
+	move.l	\2,_addr_in+4
+	AES	90
+	ENDM	
+
+FSEL_EXINPUT	MACRO
+
+	move.l	\1,_addr_in+8
+	move.l	\2,_addr_in
+	move.l	\3,_addr_in+4
+	AES	91
+	ENDM	
+
+WIND_CREATE	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	AES	100
+
+	ENDM
+
+; +++
+
+WIND_OPEN	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	AES	101
+
+	ENDM
+
+; +++
+
+WIND_CLOSE	MACRO
+
+	move.w	\1,_int_in
+	AES	102
+
+	ENDM
+
+; +++
+
+WIND_DELETE	MACRO
+
+	move.w	\1,_int_in
+	AES	103
+
+	ENDM
+
+; +++
+
+WIND_GET	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	AES	104
+	move.w	_int_out+2,\3
+	move.w	_int_out+4,\4
+	move.w	_int_out+6,\5
+	move.w	_int_out+8,\6
+
+	ENDM
+
+; +++
+
+WIND_SET	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	AES	105
+
+	ENDM
+
+; +++
+
+WIND_FIND	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	AES	106
+
+	ENDM
+
+; +++
+
+WIND_UPDATE	MACRO
+
+	move.w	\1,_int_in
+	AES	107
+
+	ENDM
+
+; +++
+
+WIND_CALC	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.w	\4,_int_in+6
+	move.w	\5,_int_in+8
+	move.w	\6,_int_in+10
+	AES	108
+	move.w	_int_out+2,\7
+	move.w	_int_out+4,\8
+	move.w	_int_out+6,\9
+	move.w	_int_out+8,\A
+
+	ENDM
+
+; +++
+
+WIND_NEW	MACRO
+
+	AES	109
+
+	ENDM
+
+; +++
+
+RSRC_LOAD	MACRO
+
+	move.l	\1,_addr_in
+	AES	110
+
+	ENDM
+
+; +++
+
+RSRC_FREE	MACRO
+
+	AES	111
+
+	ENDM
+
+; +++
+
+RSRC_GADDR	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.l	\3,_addr_in
+	AES	112
+	move.l	_addr_out,\3
+
+	ENDM
+
+; +++
+
+RSRC_SADDR	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	AES	113
+
+	ENDM
+
+; +++
+
+RSRC_OBFIX	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	114
+
+	ENDM
+
+; +++
+
+SHEL_READ	MACRO
+
+	move.l	\1,_addr_in
+	move.l	\2,_addr_in+4
+	AES	120
+
+	ENDM
+
+; +++
+
+SHEL_WRITE	MACRO
+
+	move.w	\1,_int_in
+	move.w	\2,_int_in+2
+	move.w	\3,_int_in+4
+	move.l	\4,_addr_in
+	move.l	\5,_addr_in+4
+	AES	121
+
+	ENDM
+
+; +++
+
+SHEL_GET	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	122
+
+	ENDM
+
+; +++
+
+SHEL_PUT	MACRO
+
+	move.l	\1,_addr_in
+	move.w	\2,_int_in
+	AES	123
+
+	ENDM
+
+; +++
+
+SHEL_FIND	MACRO
+
+	move.l	\1,_addr_in
+	AES	124
+
+	ENDM
+
+; +++
+
+SHEL_ENVRN	MACRO
+
+	move.l	\1,_addr_in
+	move.l	\2,_addr_in+4
+	AES	125
+
+	ENDM
+	
+FILE_SELECT	MACRO
+
+	FSEL_EXINPUT	\1,\2,\3
+	move.l	\2,A0
+	move.l	\4,A2
+	move.l	A2,A1
+	moveq	#127,D0
+.fileselect1\@	move.b	(A0),D0
+	cmp.b	#92,D0
+	bne.s	.fileselect2\@
+	lea	1(A2),A1
+.fileselect2\@	move.b	(A0)+,(A2)+
+	dbra	D0,.fileselect1\@
+	move.l	A1,A2
+	move.l	\3,A0
+	moveq	#11,D0
+.fileselect3\@	move.b	(A0)+,(A2)+
+	dbra	D0,.fileselect3\@
+	clr.b	(A2)
+
+	ENDM
+
+; +++
+
+	DATA
+
+_call_aes	move.w	D0,_op_code
+	sub	#10,D0
+	lsl	#2,D0
+	lea	_aes_table,A0
+	lea	_sint_in,A1
+	moveq	#0,D1
+	movep.l	D1,(A1)
+	move.l	(A0,D0.w),D1
+	movep.l	D1,1(A1)
+	move.l	#_aes_params,D1
+	move.l	#200,D0
+	trap	#2
+	rts
+
+_aes_params	dc.l	_control,_global
+	dc.l	_int_in,_int_out,_addr_in,_addr_out
+
+_aes_table	dc.b	0,1,0,0
+	dc.b	2,1,1,0
+	dc.b	2,1,1,0
+	dc.b	0,1,1,0
+	dc.b	2,1,1,0
+	dc.b	1,1,1,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	1,3,1,0
+	dc.b	0,1,0,0
+
+	dc.b	0,1,0,0
+	dc.b	3,5,0,0
+	dc.b	5,5,0,0
+	dc.b	0,1,1,0
+	dc.b	2,1,0,0
+	dc.b	16,7,1,0
+	dc.b	2,1,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	
+	dc.b	1,1,1,0
+	dc.b	2,1,1,0
+	dc.b	2,1,1,0
+	dc.b	2,1,1,0
+	dc.b	1,1,2,0
+	dc.b	1,1,1,0
+	dc.b	2,1,2,0
+	dc.b	3,1,1,0
+	dc.b	1,1,1,0
+	
+	dc.B	2,1,1,0
+	dc.b	1,1,1,0
+	dc.b	6,1,1,0
+	dc.b	4,1,1,0
+	dc.b	1,3,1,0
+	dc.b	2,1,1,0
+	dc.b	4,2,1,0
+	dc.b	8,1,1,0
+	dc.b	4,3,0,0
+	dc.b	0,0,0,0
+	
+	dc.b	1,1,1,0
+	dc.b	9,1,0,0
+	dc.b	1,1,1,0
+	dc.b	1,1,1,0	
+	dc.b	1,1,0,0
+	dc.b	0,5,1,0
+	dc.b	3,3,1,0
+	dc.b	2,2,1,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+
+	dc.b	4,3,0,0
+	dc.b	8,3,0,0
+	dc.b	6,1,0,0
+	dc.b	8,1,0,0
+	dc.b	8,1,0,0
+	dc.b	4,1,1,0
+	dc.b	3,1,1,0
+	dc.b	0,5,0,0
+	dc.b	1,1,1,0
+	dc.b	0,5,0,0
+	
+	dc.b	0,1,1,0
+	dc.b	0,1,1,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+
+	dc.b	0,2,2,0
+	dc.b	0,2,3,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+
+	dc.b	5,1,0,0
+	dc.b	5,1,0,0
+	dc.b	1,1,0,0
+	dc.b	1,1,0,0
+	dc.b	2,5,0,0
+	dc.b	6,1,0,0
+	dc.b	2,1,0,0
+	dc.b	1,1,0,0
+	dc.b	6,5,0,0
+	dc.b	0,0,0,0
+	
+	dc.b	0,1,1,0
+	dc.b	0,1,0,0
+	dc.b	2,1,0,0
+	dc.b	2,1,1,0
+	dc.b	1,1,1,0
+	dc.b	0,0,0,0	
+	dc.b	0,0,0,0	
+	dc.b	0,0,0,0	
+	dc.b	0,0,0,0	
+	dc.b	0,0,0,0	
+
+	dc.b	0,1,2,0
+	dc.b	3,1,2,0
+	dc.b	1,1,1,0
+	dc.b	1,1,1,0
+	dc.b	0,1,1,0
+	dc.b	0,1,2,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	dc.b	0,0,0,0
+	
+	dc.b	1,5,0,0
+
+_global
+_ap_version	ds.w	1
+_ap_count	ds.w	1
+_ap_id	ds.w	1
+_ap_private	ds.l	1
+_ap_ptree	ds.l	1
+_ap_1resv	ds.l	1
+_ap_2resv	ds.l	1
+_ap_3resv	ds.l	1
+_ap_4resv	ds.l	1
+
+_control
+_op_code	ds.w	1
+_sint_in	ds.w	1
+_sint_out	ds.w	1
+_saddr_in	ds.w	1
+_saddr_out	ds.w	1
+
+_int_in	ds.w	16
+_int_out	ds.w	8
+_addr_in	ds.l	4
+_addr_out	ds.l	4
+
+; --------------------- MINT --------------------------------------------------
+
+FLOCK	MACRO	handle,mode,start,length
+
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#92,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	(14,SP),SP
+
+	ENDM
+	
+; +++
+	
+SYIELD	MACRO
+
+	move.w	#255,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+	
+; +++
+	
+FPIPE	MACRO	fhandle
+
+	move.l	\1,-(SP)
+	move.w	#256,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+	
+; +++
+
+FCNTL	MACRO	handle,arg,cmd
+
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#260,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+FINSTAT	MACRO	handle
+
+	move.w	\1,-(SP)
+	move.w	#261,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+FOUTSTAT	MACRO	handle
+
+	move.w	\1,-(SP)
+	move.w	#262,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+FGETCHAR	MACRO	handle,mode
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#263,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+FPUTCHAR	MACRO	handle,lchar,mode
+
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#264,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+PWAIT	MACRO
+
+	move.w	#265,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PNICE	MACRO	delta
+
+	move.w	\1,-(SP)
+	move.w	#266,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+PGETPID	MACRO
+
+	move.w	#267,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PGETPPID	MACRO
+
+	move.w	#268,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PGETPGRP	MACRO
+
+	move.w	#269,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PSETPGRP	MACRO
+
+	move.w	#270,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PGETUID	MACRO
+
+	move.w	#271,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PSETUID	MACRO
+
+	move.w	#272,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PKILL	MACRO	pid,sig
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#273,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PSIGNAL	MACRO	sig,handler
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#274,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+PVFORK	MACRO
+
+	move.w	#275,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PGETGID	MACRO
+
+	move.w	#276,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PSETGID	MACRO
+
+	move.w	#277,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PSIGBLOCK	MACRO	mask
+
+	move.l	\1,-(SP)
+	move.w	#278,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+
+	ENDM
+
+; +++
+
+PSIGSETMASK	MACRO	mask
+	move.l	\1,-(SP)
+	move.w	#279,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PUSRVAL	MACRO	val
+
+	move.l	\1,-(SP)
+	move.w	#280,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PDOMAIN	MACRO	domain
+
+	move.w	\1,-(SP)
+	move.w	#281,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+PSIGRETURN	MACRO
+
+	move.w	#282,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PFORK	MACRO
+
+	move.w	#283,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PWAIT3	MACRO	flag,rusage
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#284,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+FSELECT	MACRO	timeout,rfds,wfds,reserved
+
+	move.l	\4,-(SP)
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#285,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+PRUSAGE	MACRO	rusg
+
+	move.l	\1,-(SP)
+	move.w	#286,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PSETLIMIT	MACRO	limit,value
+
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#287,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+TALARM	MACRO	time
+
+	move.l	\1,-(SP)
+	move.w	#288,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PAUSE	MACRO
+
+	move.w	#289,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+SYSCONF	MACRO	inq
+
+	move.w	\1,-(SP)
+	move.w	#290,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+PSIGPENDING	MACRO
+
+	move.w	#291,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+DPATHCONF	MACRO	name,mode
+
+	move.w	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#292,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+PMSG	MACRO	mode,mboxid,msgptr
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#293,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+FMIDIPIPE	MACRO	pid,in,out
+
+	move.w	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#294,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+PRENICE	MACRO	pid,delta
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#295,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+DOPENDIR	MACRO	name,flag
+
+	move.w	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#296,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+DREADDIR	MACRO	len,dirhandle,buf
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#297,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DREWINDDIR	MACRO	handle
+
+	move.l	\1,-(SP)
+	move.w	#298,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+DCLOSEDIR	MACRO	dirhandle
+
+	move.l	\1,-(SP)
+	move.w	#299,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+FXATTR	MACRO	flag,name,xattr
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#300,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+FLINK	MACRO	oldname,newname
+
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#301,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+FSYMLINK	MACRO	oldname,newname
+
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#302,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+FREADLINK	MACRO	bufsiz,buf,name
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#303,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DCNTL	MACRO	cmd,name,arg
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#304,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+FCHOWN	MACRO	name,uid,gid
+
+	move.w	\3,-(SP)
+	move.w	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#305,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+FCHMOD	MACRO	name,mode
+
+	move.w	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#306,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#8,SP
+
+	ENDM
+
+; +++
+
+PUMASK	MACRO	mode
+
+	move.w	\1,-(SP)
+	move.w	#307,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#4,SP
+
+	ENDM
+
+; +++
+
+PSEMAPHORE	MACRO	mode,id,timeout
+
+	move.l	\3,-(SP)
+	move.l	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#308,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+DLOCK	MACRO	mode,drv
+
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#309,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PSIGPAUSE	MACRO	mask
+
+	move.l	\1,-(SP)
+	move.w	#310,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+PSIGACTION	MACRO	sig,act,oact
+
+	move.w	\3,-(SP)
+	move.l	\2,-(SP)
+	move.l	\1,-(SP)
+	move.w	#311,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	12(SP),SP
+
+	ENDM
+
+; +++
+
+PGETEUID	MACRO
+
+	move.w	#312,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PGETEGID	MACRO
+
+	move.w	#313,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#2,SP
+
+	ENDM
+
+; +++
+
+PWAITPID	MACRO	pid,flag,rusage
+
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#314,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+DGETCWD	MACRO	path,drv,size
+
+	move.l	\3,-(SP)
+	move.w	\2,-(SP)
+	move.w	\1,-(SP)
+	move.w	#315,-(SP)
+	trap	#1	; *** GEMDOS ***
+	lea	10(SP),SP
+
+	ENDM
+
+; +++
+
+SALERT	MACRO	str
+	move.l	\1,-(SP)
+	move.w	#316,-(SP)
+	trap	#1	; *** GEMDOS ***
+	addq	#6,SP
+
+	ENDM
+
+; +++
+
+; --------------------- INTEL -------------------------------------------------
+
+INVERSE_LONG	MACRO	adress_register,adress_register
+
+	lea	intel+4,\2
+	move.b	(\1)+,-(\2)
+	move.b	(\1)+,-(\2)
+	move.b	(\1)+,-(\2)
+	move.b	(\1)+,-(\2)
+
+	ENDM
+
+; +++
+
+INVERSE_MOT	MACRO	adress_register,adress_register
+
+	lea	intel+2,\2
+	move.b	(\1)+,-(\2)
+	move.b	(\1)+,-(\2)
+
+	ENDM
+
+; +++
+
+INVERSE_MOT2	MACRO	adresse,registre
+
+	move.w	(\1)+,\2
+	ror	#8,\2
+
+	ENDM
+
+; +++
+
+INVERSE_LONG2	MACRO	adresse,registre
+
+	move.l	(\1)+,\2
+	ror	#8,\2
+	swap	\2
+	ror	#8,\2
+
+	ENDM
+
+; +++
+
+intel	ds.l	1
+
+; --------------------- TOSUTIL -----------------------------------------------
+
+;	Initialisation d'une application
+
+;	_ARGC  (mot)	nb de params dans la ligne de commande
+;	_ARGV (long)	paramätres de la ligne de commande
+;	_ENV  (long)	variables d'environnement
+;	PILE (long)	taille de la pile
+
+	TEXT
+
+START_APP	MACRO	env,pile
+
+	move.l	A0,D0	; A0<>0 si accessoire = adr basepage
+	bne.s	_accessoire
+	move.l	4(SP),D0	; basepage est en 4(SP)
+	clr	_acc_flag	; flag app/acc
+	bra.s	_application
+_accessoire	move.w	#-1,_acc_flag
+_application
+	move.l	D0,A0	; A0 est la basepage
+	move.l	A0,A6	; sauve adresse basepage
+
+	move.l	12(A0),D0	;   taille zone TEXT
+	add.l	20(A0),D0	; + taille zone DATA
+	add.l	28(A0),D0	; + taille zone BSS
+	add.l	\1,D0	; + taille de la pile
+	add.l	#256,D0	; + taille de la basepage
+			; = Taille du programme
+	move.l	D0,D1
+	add.l	A0,D1
+	and	#-4,D1
+	move.l	D1,SP	; Init nouvelle pile
+
+	tst	_acc_flag	; accessoire : pas env et arguments
+	bne	_pas_init_app
+
+	MSHRINK	A0,D0	; libäre mÇmoire non utile
+
+	; -------------	Lecture de l'environnement
+	
+	lea	0.w,A4	; adresse params si ARGV
+	pea	0.w	; derniäre variable d'environnement
+	moveq	#0,D0	; nb de variables
+
+	move.l	$2c(A6),A5	; adresse environnement
+	tst.b	(A5)
+	beq.s	_fin_env
+_lire_env
+	tst.b	(A5)	; si pas octet nul
+	beq.s	_fin_lire_env
+	pea	(A5)	;   mettre l'adresse dans la pile
+	addq	#1,D0
+_bcl_lire_env	
+	tst.b	(A5)+	;   si octet nul on arrete
+	beq.s	_lire_env
+	
+	cmp.b	#'A',-1(A5)	; teste si "ARGV="
+	bne.s	_bcl_lire_env	; si oui c'est la derniere variable
+	cmp.b	#'R',(A5)	; d'environnement
+	bne.s	_bcl_lire_env	; tout le reste est la ligne de commande
+	cmp.b	#'G',1(A5)
+	bne.s	_bcl_lire_env
+	cmp.b	#'V',2(A5)
+	bne.s	_bcl_lire_env
+	cmp.b	#'=',3(A5)
+	bne.s	_bcl_lire_env
+	cmp.b	#127,128(A6)	; si longueur cmd line<>127, pas ARGV
+	bne.s	_bcl_lire_env
+
+	clr.l	(SP)+	; supprime ARGV de la pile
+	subq	#1,D0	; idem dans le nb de variables
+	addq.l	#4,D0
+
+_env_argv	tst.b	(A5)+	; passe la valeur de ARGV
+	bne.s	_env_argv
+
+	move.l	A5,A4
+_fin_lire_env
+	; Remet les variables dans l'ordre
+	
+	move.l	SP,A3
+	moveq	#0,D2
+	move.l	D0,D2
+	add.l	D2,D2
+	add.l	D2,D2
+	lsr	#1,D0
+	beq.s	_fin_env
+	subq	#1,D0
+	lea	(SP,D2.l),A2
+_permute_env	move.l	(A3),D2
+	move.l	-4(A2),(A3)+
+	move.l	D2,-(A2)
+	dbra	D0,_permute_env
+_fin_env
+	move.l	SP,_env	; renvoie l'adresse des variables
+
+	; ------------- Lecture de la ligne de commande
+
+	move.l	A4,A0
+	move.l	A4,D0
+	beq.s	_arg_init
+
+	pea	0.w	; dernier parametre
+	moveq	#0,D0
+	tst.b	(A5)
+	beq.s	_fin_args
+_lire_argv
+	tst.b	(A5)
+	beq.s	_fin_lire_arg
+	pea	(A5)
+	addq	#1,D0
+_lire_argv1
+	tst.b	(A5)+
+	bne.s	_lire_argv1
+	bra.s	_lire_argv
+_arg_init
+	lea	129(A6),A0
+	moveq	#0,D1	; nb de caracteres ligne de commande
+	move.b	128(A6),D1
+	lea	_empty_name,A1
+
+	pea	0.w	; dernier param
+	pea	(A1)	; balance le prg : argv[0]
+	moveq	#1,D0	; nb de params -> argc
+	tst	D1
+	beq.s	_fin_lire_arg
+_bcl_lire_arg
+	cmp.b	#' ',(A0)
+	beq.s	_bcl_lire_arg1
+	cmp.b	#'"',(A0)
+	beq.s	_bcl_lire_arg1
+	pea	(A0)
+	addq	#1,D0
+_bcl_lire_arg2	
+	tst.b	(A0)
+	beq.s	_fin_lire_arg
+	cmp.b	#' ',(A0)
+	beq.s	_bcl_lire_arg
+	cmp.b	#'"',(A0)
+	beq.s	_bcl_lire_arg
+	addq	#1,A0
+	bra.s	_bcl_lire_arg2
+_bcl_lire_arg1
+	clr.b	(A0)+
+	bra.s	_bcl_lire_arg
+_fin_lire_arg
+	; Inverse les arguments
+
+	move.l	SP,A3
+	moveq	#0,D2
+	move.l	D0,D2
+	add.l	D2,D2
+	add.l	D2,D2
+	move.w	D0,D1
+	lsr	#1,D1
+	beq.s	_fin_args
+	subq	#1,D1
+	lea	(SP,D2.l),A2
+_permute_arg	move.l	(A3),D2
+	move.l	-4(A2),(A3)+
+	move.l	D2,-(A2)
+	dbra	D1,_permute_arg
+_fin_args
+	move.w	D0,_argc
+	move.l	SP,_argv
+
+	; -------------	Fin de l'initialisation
+_pas_init_app
+
+	ENDM
+
+; +++
+
+	BSS
+_argc	ds.w	1
+_argv	ds.l	1
+_env	ds.l	1
+	
+; -------------	Initialisation d'une application GEM
+;	> application	sous programme correSPondant Ö l'application
+;	> rsc_name	nom du fichier ressource
+;	> menu	nb de l'objet correSPondant au menu
+;	< adr_menu	adresse de base du menu de l'application
+;	> app_title	nom de l'application (dans le menu)
+;	> app_name	nom du programme (dans u:\proc)
+
+START_GEM	MACRO	application,rsc_name,menu,adr_menu,app_title,app_name
+	APPL_INIT
+	move.w	_int_out,_ap_id
+	cmp	#-1,_ap_id
+	beq	_fin
+	
+	GRAF_MOUSE	#_ARROW
+
+	cmp	#-1,_ap_count
+	bne	_notMint
+	IFEQ	NARG-5
+	MENU_REGISTER	_ap_id,\4
+	ENDC
+	IFEQ	NARG-6
+	MENU_REGISTER	#_REG_NEWNAME,\5
+	ENDC
+_notMint	
+	IFNE	NARG-1
+	RSRC_LOAD	\2
+	tst	_int_out
+	beq	_fin1
+
+	RSRC_GADDR	#_R_TREE,\3,\4
+
+	WIND_UPDATE	#_BEG_UPDATE
+	MENU_BAR	\4,#_MENU_INSTALL
+	WIND_UPDATE	#_END_UPDATE
+	ENDC
+
+	lea	_vdiparblk_in,A0
+	moveq	#9,D0
+_initvdiparblk	move.w	#1,(A0)+
+	dbra	D0,_initvdiparblk
+	move.w	#2,(A0)
+	GETREZ
+	addq	#2,D0
+	move.w	D0,_vdiparblk_in
+	GRAF_HANDLE	_char_width,_char_height,_box_width,_box_height
+	move.w	_int_out,_vdi_handle
+	V_OPNVWK	#_vdiparblk_in,_vdi_handle,#_vdiparblk_out
+
+	jsr	\1
+
+	V_CLSVWK	_vdi_handle
+	MENU_BAR	\4,#_MENU_REMOVE
+	RSRC_FREE
+_fin1	APPL_EXIT
+_fin	
+
+	ENDM
+
+; +++
+
+	DATA
+	
+_empty_name	dc.b	32,0
+	even
+
+	BSS
+
+;	Infos START_APP
+
+_acc_flag	ds.w	1
+
+;	Infos START_GEM
+
+_vdi_handle	ds.w	1
+_vdiparblk_in	ds.w	11
+_vdiparblk_out	ds.w	57	
+_char_width	ds.w	1
+_char_height	ds.w	1
+_box_width	ds.w	1
+_box_height	ds.w	1
+
+; +++
+
+FLOAD	MACRO	handle,nom,adresse,longueur,offset
+	FOPEN	\2,#S_READ
+	ext.l	D0
+	tst.l	D0
+	bmi.s	_fload_error\@
+	move.w	D0,\1
+	IFEQ	NARG-5
+	FSEEK	\5,\1,#SEEK_SET
+	tst.l	D0
+	bmi.s	_fload_error\@
+	ENDC
+	FREAD	\1,\4,\3
+	tst.l	D0
+	bmi.s	_fload_error\@
+	FCLOSE	\1
+	ext.l	D0
+_fload_error\@
+
+	ENDM
+	
+FLSAVE	MACRO	handle,nom,adresse,longueur
+	FCREATE	\2,#0
+	ext.l	D0
+	tst.l	D0
+	bmi	_fsave_error\@
+	move.w	D0,\1
+	FWRITE	\1,\4,\3
+	tst.l	D0
+	bmi	_fsave_error\@
+	FCLOSE	\1
+	ext.l	D0
+_fsave_error\@
+
+	ENDM
+
+; +++
+
+MTFREE	MACRO	addr
+	tst.l	\1
+	beq.s	mtfree_nz\@
+	MFREE	\1
+mtfree_nz\@
+
+	ENDM
+
+; +++
+
+INVERSE_MOT	MACRO	addr
+
+	move.b	\1(A0),D0
+	move.b	\1+1(A0),\1(A0)
+	move.b	D0,\1+1(A0)
+
+	ENDM
+
+; +++
+
+INVERSE_BOOT	MACRO	buffer
+
+	move.l	\1,A0
+	INVERSE_MOT	BPS
+	INVERSE_MOT	RES
+	INVERSE_MOT	NDIRS
+	INVERSE_MOT	NSECTS
+	INVERSE_MOT	SPF
+	INVERSE_MOT	SPT
+	INVERSE_MOT	NSIDES
+	INVERSE_MOT	NHID
+
+	ENDM
+
+; --------------------- SSAVCALL ----------------------------------------------
+
+
+

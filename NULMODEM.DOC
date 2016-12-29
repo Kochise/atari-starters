@@ -1,0 +1,95 @@
+' *****************************************************************************
+' *****************************************************************************
+' *****************************************************************************
+' ***                                                                       ***
+' ***  NN  NN UU  UU LL     LL          MM  MM  OOOO  DDDDD  EEEEEE MM  MM  ***
+' ***  NNN NN UU  UU LL     LL          MMMMMM OO  OO DD  DD EE     MMMMMM  ***
+' ***  NNNNNN UU  UU LL     LL          MMMMMM OO  OO DD  DD EEEE   MMMMMM  ***
+' ***  NN NNN UU  UU LL     LL          MM  MM OO  OO DD  DD EE     MM  MM  ***
+' ***  NN  NN  UUUU  LLLLLL LLLLLL      MM  MM  OOOO  DDDDD  EEEEEE MM  MM  ***
+' ***                                                                       ***
+' *****************************************************************************
+' *****************************************************************************
+' *****************************************************************************
+'
+' ***      INDICATIONS DE BRANCHEMENT POUR CREER DES CABLES NULL MODEM      ***
+'
+
+I. Les prises au format CANNON ...
+
+  A. La prise DB25 (vue du cote soudures).
+        _____________________________
+      1 \ O O O O O . O O . . . . . / 13  O = Broches connectees.
+      14 \ . . . . . . O . O . . . / 25   . = Broches non connectees.
+          -------------------------
+
+      1 - Masse de protection - GND
+      2 - Transmission de donnees - TX
+      3 - Reception de donnees - RX
+      4 - Demande d'emission - RTS
+      5 - Pret … emettre - CTS
+      6 - Non connectee
+      7 - Masse signaux - GND
+      8 - Detection de porteuse - DCD (DTR)
+      9-19 - Non connectees
+      20 - Terminal donnees pret - DSR
+      21 - Non connectee
+      22 - Indicateur d'appel
+      23-25 - Non connectees
+
+  B. La prise DB9 (vue du cote soudures).
+        _____________
+      1 \ O O O O O / 5  O = Broches connectees.
+       6 \ O O O O / 9   . = Broches non connectees.
+          ---------
+
+      1 - Detection de porteuse - DCD
+      2 - Reception de donnees - RX
+      3 - Transmission de donnees - TX
+      4 - Terminal donnees pret - DTR
+      5 - Masse signaux - GND
+      6 - Choix donnees pret - DSR
+      7 - Demande d'emission - RTS
+      8 - Pret … emettre - CTS
+      9 - Indicateur d'appel - RI
+
+II. Branchements NULL MODEMs.
+
+  A. DB25 <-> DB25.
+
+     DB25(1) DB25(2)
+
+        2  <->  3
+        3  <->  2
+        4  <->  5
+        5  <->  4
+     ,->6       6<-,
+     |  7  <->  7  |
+     '->8  <-> 20  |
+        20 <->  8<-'
+
+  B. DB25 <-> DB9.
+
+     DB25    DB9
+
+        2  <->  2
+        3  <->  3
+        4  <->  8
+        5  <->  7
+     ,->6
+     |  7  <->  5
+     '->8  <->  4
+        20 <->  6
+
+  C. DB9 <-> DB9.
+
+     DB9(1)  DB9(2)
+
+        4  <->  6
+        2  <->  3
+        3  <->  2
+        5  <->  5
+        6  <->  4
+        7  <->  8
+        8  <->  7
+
